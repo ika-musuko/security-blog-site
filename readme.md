@@ -1,13 +1,13 @@
 CS 166 Security Blog Web Application
 ====================================
 
-Blog website made in Flask without any other Flask extensions (aka, from scratch).
-python3.6
-server: nginx+uwsgi
-!!! **INSTALL LINUX** !!!
-(i haven't tested this on windows so who knows how the dependencies will work)
+Blog website made in Flask without any other Flask extensions (aka, from scratch).<br/>
+python3.6<br/>
+server: nginx+uwsgi<br/>
+!!! **INSTALL LINUX** !!!<br/>
+(i haven't tested this on windows so who knows how the dependencies will work)<br/>
 
-Installation Instructions: run install_dependencies.sh first and then create a virtual environment and install the requirements
+Installation Instructions: run install_dependencies.sh first and then create a virtual environment and install the requirements<br/>
 
 Blog Site
 ---------
