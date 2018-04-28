@@ -1,0 +1,10 @@
+server {
+    listen 80;
+    server_name 0.0.0.0;
+
+    location / {
+        include uwsgi_params;
+        uwsgi_pass unix:///home/sherwyn/Dropbox/school/spr2018/infosec/blog_site/blog_site.sock;
+    }
+
+}
