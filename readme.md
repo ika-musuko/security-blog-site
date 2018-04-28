@@ -11,43 +11,43 @@ Installation Instructions: run install_dependencies.sh first and then create a v
 
 Blog Site
 ---------
-[ ] registration screen
-[ ] login screen
-[ ] blog list screen
+- [ ] registration screen
+- [ ] login screen
+- [ ] blog list screen
 - normal user
-    [ ] add blog item
-    [ ] delete own blog item
+    - [ ] add blog item
+    - [ ] delete own blog item
 - admin user
-    [ ] delete any blog item
-[ ] logout
+    - [ ] delete any blog item
+- [ ] logout
 
 Security Features
 -----------------
-[ ] **authentication**: hashed and salted passwords
-[ ] **authorization**: normal and admin roles implemented
-[ ] **availability**: registration must have a captcha
-[ ] **session management**: use sessions to correctly remember the user
-[ ] injection attack prevention (except for attack demo)
-[ ] forms use POST method
-[ ] forms have CSRF prevention (except for attack demo)
+- [ ] **authentication**: hashed and salted passwords
+- [ ] **authorization**: normal and admin roles implemented
+- [ ] **availability**: registration must have a captcha
+- [ ] **session management**: use sessions to correctly remember the user
+- [ ] injection attack prevention (except for attack demo)
+- [ ] forms use POST method
+- [ ] forms have CSRF prevention (except for attack demo)
 
 
 Required Content
 ----------------
 - first blog item by me talking about how i made this
-    [ ] firewall rules
-    [ ] info about security features
-[ ] footer with privacy statement page
-[ ] at least 3 other CS 166 relevant blog items
+    - [ ] firewall rules
+    - [ ] info about security features
+- [ ] footer with privacy statement page
+- [ ] at least 3 other CS 166 relevant blog items
 
 Feature Demonstrations
 ----------------------
-[ ] SQL injection attack demo and how to prevent it
-[ ] XSS injection attack and possible defenses
-[ ] website defacing
-[ ] demonstrate how cookies work
-[ ] demonstrate how session management works
-
+- [ ] SQL injection attack demo and how to prevent it
+- [ ] XSS injection attack and possible defenses
+- [ ] website defacing
+- [ ] demonstrate how cookies work
+- [ ] demonstrate how session management works
+ 
 Bonus Features
 --------------
 TBD
