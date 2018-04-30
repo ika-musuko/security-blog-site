@@ -7,8 +7,6 @@ server: nginx+uwsgi<br/>
 !!! **INSTALL LINUX** !!!<br/>
 (i haven't tested this on windows so who knows how the dependencies will work)<br/>
 
-Installation Instructions: run install_dependencies.sh first and then create a virtual environment and install the requirements<br/>
-
 Blog Site
 ---------
 - [ ] registration screen
