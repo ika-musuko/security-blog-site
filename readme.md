@@ -55,4 +55,4 @@ TBD
 
 Cloud Deployment
 ---------------
-TBD
+- [X] DigitalOcean Droplet on NGINX with ufw firewall
