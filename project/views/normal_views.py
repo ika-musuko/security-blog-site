@@ -4,14 +4,14 @@ normal_views.py
 routes for the normal views
 '''
 
-from flask import url_for, redirect
+from flask import render_template, url_for, redirect
 
 from project import app
 
 
 @app.route('/')
 def index():
-    return "hi"
+    return render_template("index.html")
 
 
 @app.route("/demos")

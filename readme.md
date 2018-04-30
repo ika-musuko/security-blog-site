@@ -48,7 +48,7 @@ Feature Demonstrations
  
 Bonus Features
 --------------
-TBD
+- [ ] Bootstrap styling
 
 
 Cloud Deployment

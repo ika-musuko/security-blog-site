@@ -1,3 +1,37 @@
 {# base template #}
 {# links: home (all blog posts, paginated) demos          (login/register)/logout #}
 {# footer with privacy statement page #}
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+        <title>{% block title %}{% endblock %} | CS166 Security Blog Site</title>
+        {% block head %}
+        {% endblock %}
+    </head>
+
+    <body>
+        <div class="navbar navbar-light">
+            <ul class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Home</a></ul>
+            {# <ul class="nav-item"><a class="nav-link" href="{{ url_for('your_profile') }}">Your Profile</a></ul> #}
+            <ul class="nav-item"><a class="nav-link" href="{{ url_for('demos') }}">Security Demos</a></ul>
+            <ul class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Login</a></ul>
+            <ul class="nav-item"><a class="nav-link" href="{{ url_for('register') }}">Register</a></ul>
+            <ul class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Logout</a></ul>
+        </div>
+
+        <div class="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        <footer>
+            Sherwyn Sen - 2018<br/>
+            <a class="" href="{{ url_for('privacy') }}">Privacy Statement</a>
+        </footer>
+    </body>
+
+</html>
