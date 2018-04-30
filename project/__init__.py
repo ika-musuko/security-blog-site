@@ -1,4 +1,4 @@
 from flask import Flask
 app = Flask(__name__)
 
-from project import views
+from project.views import normal_views, error_views

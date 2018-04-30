@@ -1,6 +1,12 @@
-from project import app
+'''
+normal_views.py
 
-from flask import redirect, url_for
+routes for the normal views
+'''
+
+from flask import url_for, redirect
+
+from project import app
 
 
 @app.route('/')
@@ -36,4 +42,3 @@ def post(number: int):
 @app.route("/privacy")
 def privacy():
     return "privacy statement"
-
