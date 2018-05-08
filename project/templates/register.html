@@ -1,1 +1,22 @@
 {# registration #}
+{% extends "base.html" %}
+{% set active_page="register" %}
+
+{% block title %}Register{% endblock %}
+{% block head %}{% endblock %}
+{% block heading %}Register a New Account{% endblock %}
+{% block content %}
+<form>
+    <label for="username">Username</label>
+    <input class="form-control" id="username" type="text">
+    <label for="password">Password</label>
+    <input class="form-control" id="password" type="password">
+    <label for="password">Confirm Password</label>
+    <input class="form-control" id="confirm-password" type="password">
+    <button class="btn btn-success top10">register →</button>
+</form>
+
+<button class="loginBtn loginBtn--google">
+    Login with Google
+</button>
+{% endblock %}

@@ -16,4 +16,4 @@ def register():
 
 @app.route("/logout")
 def logout():
-    redirect(url_for("index"))
+    return redirect(url_for("index"))

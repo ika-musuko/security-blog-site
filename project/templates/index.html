@@ -6,40 +6,7 @@
 {% block head %}{% endblock %}
 {% block heading %}Recent Posts{% endblock %}
 {% block content %}
-<div class="row">
-    {# search bar #}
-    <div class="form-group col-md-12">
-        <form>
-            <div class="input-group row" style="margin: 0px 0px">
-                <input class="form-control" type="text">
-                <button type="button" class="btn btn-sm btn-success">Search!</button>
-            </div>
-        </form>
-    </div>
-
-    {# pagination #}
-    <div class="col-md-6">
-        <h6>Total posts: {{ total_posts }}</h6>
-        <nav>
-            <ul class="pagination">
-                {#<li class="page-item">
-                    <a class="page-link" href="{{ url_for('index', page=page-1) }}">Previous</a>
-                </li>#}
-                {% for p in range(posts|length - 1) %}
-                    <li class="page-item">
-                        <a class="page-link" href="{{ url_for('index', page=p+1) }}">{{ p+1 }}</a>
-                    </li>
-                {% endfor %}
-                {#<li class="page-item">
-                    <a class="page-link" href="{{ url_for('index', page=page+1) }}">Next</a>
-                </li>#}
-            </ul>
-        </nav>
-    </div>
-    <div class="col-md-6">
-    </div>
-</div>
-
+{% include "post_selector.html" %}
 {# blog posts #}
 {{ populate_posts(posts) }}
 {% endblock %}

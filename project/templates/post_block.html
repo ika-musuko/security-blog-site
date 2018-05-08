@@ -16,13 +16,13 @@
             Author: {{ post["author"] }}<br/>
             Published on: {{ post["published_on"] }}<br/>
         </i></p>
-        <p>
-            {{ post["preview"] }}
+        <p class="post-preview">
+            {{ post["preview"] }}{% if post["preview"]|length >= 100 %}...{% endif %}
         </p>
         <p>
-            <button class="btn btn-success">View</button>
-            <button class="btn btn-sm btn-warning">Edit</button>
-            <button class="btn btn-sm btn-danger">Delete</button>
+            <a class="btn btn-success" href="{{ url_for('post', number=post['id']) }}">View</a>
+            <a class="btn btn-sm btn-warning" href="{{ url_for('edit_post', number=post['id']) }}">Edit</a>
+            <a class="btn btn-sm btn-danger" href="{{ url_for('delete_post', number=post['id']) }}">Delete</a>
         </p>
     </div>
 </div>

@@ -29,6 +29,11 @@ hr{
     margin: 25px;
     margin-right: var(--right-margins);
 }
+
+.post-preview {
+    word-wrap: break-word;
+}
+
 body { padding: 2em; }
 
 
@@ -77,3 +82,4 @@ body { padding: 2em; }
 .loginBtn--google:focus {
   background: #E74B37;
 }
+
