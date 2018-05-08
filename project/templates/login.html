@@ -1,0 +1,20 @@
+{# login #}
+{% extends "base.html" %}
+{% set active_page="login" %}
+
+{% block title %}Login{% endblock %}
+{% block head %}{% endblock %}
+{% block heading %}Login{% endblock %}
+{% block content %}
+<form>
+  <label for="username">Username</label>
+  <input class="form-control" type="text">
+  <label for="password">Password</label>
+  <input class="form-control" type="password">
+  <button class="btn btn-primary top10">login →</button>
+</form>
+
+<button class="loginBtn loginBtn--google">
+  Login with Google
+</button>
+{% endblock %}

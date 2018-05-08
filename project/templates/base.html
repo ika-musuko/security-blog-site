@@ -1,6 +1,16 @@
 {# base template #}
 {# links: home (all blog posts, paginated) demos          (login/register)/logout #}
 {# footer with privacy statement page #}
+{% macro populate_posts(posts) %}
+<ul>
+    {{ posts }}
+{% for post in posts %}
+    <h5>{{ post.id }}</h5>
+    {% include "post_block.html" %}
+{% endfor %}
+</ul>
+{% endmacro %}
+
 <html>
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
