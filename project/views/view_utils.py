@@ -3,7 +3,14 @@ import random
 import string
 from functools import wraps
 
+from flask import request, url_for
+from werkzeug.utils import redirect
+
 from project import app, POSTS_PER_PAGE
+
+GETPOST = ['GET', 'POST']
+GET = ['GET']
+POST = ['POST']
 
 @app.context_processor
 def inject_posts_per_page():
@@ -11,6 +18,20 @@ def inject_posts_per_page():
 
 
 # decorators
+def post_searcher(f):
+    '''
+    use this decorator for any page that utilizes the search bar
+    :param f:
+    :return:
+    '''
+    @wraps(f)
+    def inside(*args, **kwargs):
+        if request.method == "POST" and request.form["search"]:
+            keyword = request.form["search"]
+            return redirect(url_for("search", keyword=keyword))
+        return f(*args, **kwargs)
+    return inside
+
 def login_required(f):
     @wraps(f)
     def inside(*args, **kwargs):
@@ -69,3 +90,5 @@ def postmaker(total_posts: int, page: int):
     # array indexing starts on 0
     ppage = page - 1
     return posts[ppage*POSTS_PER_PAGE:page*POSTS_PER_PAGE]
+
+

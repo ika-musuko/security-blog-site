@@ -1,6 +1,7 @@
 {# base template #}
 {# links: home (all blog posts, paginated) demos          (login/register)/logout #}
 {# footer with privacy statement page #}
+{% set values={} %}
 {% macro populate_posts(posts) %}
 <ul>
 {% for post in posts %}

@@ -4,16 +4,17 @@ normal_views.py
 routes for the normal views
 '''
 
-from flask import redirect, url_for, render_template
+from flask import request, redirect, url_for, render_template
 import datetime
 
 from project import app
-from project.views.view_utils import login_required, email_verified, postmaker
+from project.views.view_utils import GETPOST, post_searcher, login_required, email_verified, postmaker
 
 
-@app.route('/')
-@app.route('/index/')
-@app.route('/index/<int:page>')
+@app.route('/', methods=GETPOST)
+@app.route('/index/', methods=GETPOST)
+@app.route('/index/<int:page>', methods=GETPOST)
+@post_searcher
 def index(page: int=1):
     # query the database for page*POSTS_PER_PAGE ~ (page+1)*POSTS_PER_PAGE
     #todo
@@ -22,6 +23,16 @@ def index(page: int=1):
 
     return render_template("index.html", total_posts=total_posts, posts=posts, page=page)
 
+@app.route('/search/<keyword>', methods=GETPOST)
+@app.route('/search/<keyword>/<int:page>', methods=GETPOST)
+@post_searcher
+def search(keyword: str, page: int=1):
+    # query the database for page*POSTS_PER_PAGE ~ (page+1)*POSTS_PER_PAGE
+    #todo
+    total_posts = 21
+    posts = postmaker(total_posts, page)
+
+    return render_template("search.html", keyword=keyword, total_posts=total_posts, posts=posts, page=page)
 
 
 @app.route("/your_profile")

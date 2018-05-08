@@ -1,0 +1,14 @@
+{# blog list screen #}
+{% extends "base.html" %}
+{% set active_page="search" %}
+
+{% block title %}Search: {{ keyword }}{% endblock %}
+{% block head %}{% endblock %}
+{% block heading %}Search Results for: {{ keyword }}{% endblock %}
+{% block content %}
+{% with values={"keyword" : keyword} %}
+{% include "post_selector.html" %}
+{% endwith %}
+{# blog posts #}
+{{ populate_posts(posts) }}
+{% endblock %}

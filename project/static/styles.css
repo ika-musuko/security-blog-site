@@ -83,3 +83,8 @@ body { padding: 2em; }
   background: #E74B37;
 }
 
+.active-selection{
+    background: #0044FF;
+    color: white;
+}
+

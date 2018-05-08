@@ -1,10 +1,10 @@
 <div class="row">
     {# search bar #}
     <div class="form-group col-md-12">
-        <form>
+        <form method="POST">
             <div class="input-group row" style="margin: 0px 0px">
-                <input class="form-control" id="search" type="text">
-                <button type="button" class="btn btn-sm btn-success">Search!</button>
+                <input class="form-control" name="search" type="text">
+                <input type="submit" class="btn btn-sm btn-success" value="Search!">
             </div>
         </form>
     </div>
@@ -19,7 +19,7 @@
             </li>#}
                 {% for p in range(total_posts//POSTS_PER_PAGE + 1) %}
                 <li class="page-item">
-                    <a class="page-link" href="{{ url_for(active_page, page=p+1) }}">{{ p+1 }}</a>
+                    <a class="page-link {% if p+1==page %}active-selection{% endif %}" href="{{ url_for(active_page, page=p+1, **values) }}">{{ p+1 }}</a>
                 </li>
                 {% endfor %}
                 {#<li class="page-item">
