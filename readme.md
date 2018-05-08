@@ -48,8 +48,8 @@ Feature Demonstrations
  
 Bonus Features
 --------------
-- [ ] Bootstrap styling
-
+- [X] Bootstrap styling
+- [ ] Article search
 
 Cloud Deployment
 ---------------

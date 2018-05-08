@@ -16,8 +16,11 @@ def index():
 
 @app.route("/demos")
 def demos():
-    return "demos"
+    return render_template("demos.html")
 
+@app.route("/your_profile")
+def your_profile():
+    return "your profile"
 
 @app.route("/login")
 def login():
