@@ -7,6 +7,7 @@
 {% block heading %}{{ username }}'s Profile{% endblock %}
 {% block content %}
 <h5>Joined: {{ user["join_date"] }}</h5>
+<h5>Email verified: {{ user["email_verified"] }}</h5>
 <h5>Admin Status: {{ user["admin_status"] }}</h5>
 <button class="btn btn-warning">Toggle Admin Status</button>
 {# <h2 class="top30">{{ username }}'s posts</h2>

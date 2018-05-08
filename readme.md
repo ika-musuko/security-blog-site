@@ -49,6 +49,7 @@ Feature Demonstrations
 Bonus Features
 --------------
 - [X] Bootstrap styling
+- [ ] Edit own post
 - [ ] Article search
 
 Cloud Deployment
