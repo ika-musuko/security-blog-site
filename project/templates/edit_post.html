@@ -1,0 +1,10 @@
+{# edit an old post #}
+{% extends "base.html" %}
+{% set active_page="edit_post" %}
+
+{% block title %}Edit Post #{{ number }}{% endblock %}
+{% block head %}{% endblock %}
+{% block heading %}Editing Post #{{ number }}{% endblock %}
+{% block content %}
+{% include "post_form.html" %}
+{% endblock %}

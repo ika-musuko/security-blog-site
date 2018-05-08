@@ -1,0 +1,10 @@
+{# write a new post #}
+{% extends "base.html" %}
+{% set active_page="new_post" %}
+
+{% block title %}New Post{% endblock %}
+{% block head %}{% endblock %}
+{% block heading %}Write a New Blog Post{% endblock %}
+{% block content %}
+{% include "post_form.html" %}
+{% endblock %}

@@ -61,17 +61,17 @@ def post(number: int):
     return "post: %s" % number
 
 
-@app.route("/new_post")
+@app.route("/new_post", methods=GETPOST)
 @login_required
 @email_verified
 def new_post():
-    return "new post"
+    return render_template("new_post.html")
 
 @app.route("/edit_post/<int:number>")
 @login_required
 @email_verified
 def edit_post(number: int):
-    return "EDIT post: %s" % number
+    return render_template("edit_post.html", number=number)
 
 
 @app.route("/delete_post/<int:number>")

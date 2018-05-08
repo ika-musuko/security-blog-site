@@ -7,15 +7,15 @@
 {% block heading %}Register a New Account{% endblock %}
 {% block content %}
 <form method="POST">
-    <label for="username">Email</label>
-    <input class="form-control" id="email" type="text">
+    <label for="email">Email</label>
+    <input class="form-control" name="email" type="text">
     <label for="username">Username</label>
-    <input class="form-control" id="username" type="text">
+    <input class="form-control" name="username" type="text">
     <label for="password">Password</label>
-    <input class="form-control" id="password" type="password">
-    <label for="password">Confirm Password</label>
-    <input class="form-control" id="confirm-password" type="password">
-    <button class="btn btn-success top10">register →</button>
+    <input class="form-control" name="password" type="password">
+    <label for="confirm_password">Confirm Password</label>
+    <input class="form-control" name="confirm-password" type="password">
+    <input type="submit" class="btn btn-success top10" value="register →">
 </form>
 
 <button class="loginBtn loginBtn--google">
