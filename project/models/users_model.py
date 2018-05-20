@@ -1,9 +1,15 @@
 from project import models
 from project.exceptions.user_exceptions import UserExistsException
-from project.users.auth import hash_password
-from project.utils import generate_random_string
+from project.utils import generate_random_string, placeholder_gen, hash_password, comma_join
 import datetime
 
+
+def get_user(username: str, columns: list):
+    columns_formatted = comma_join(columns) if columns else '*'
+    return models.get_sql(statement="SELECT {} FROM users WHERE user_id=%s".format(columns_formatted), values=[username], amount=1)
+
+def set_user(username: str, column: str, value):
+    models.set_sql("UPDATE users SET %s=%s WHERE user_id=%s", [column, value, username])
 
 def check_user_exists(user_id: str):
     '''
@@ -47,8 +53,7 @@ def create_new_user(user_id: str, email: str, password: str):
 
 
 def get_email_verification(user_id: str):
-    return models.get_sql(statement="SELECT email_verification FROM users WHERE user_id=%s", values=[user_id], amount=1)["email_verification"]
-
+    return get_user(user_id, ["email_verification"])["email_verification"]
 
 def is_email_verified(user_id: str):
     '''

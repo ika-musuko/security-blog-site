@@ -1,5 +1,5 @@
 import pymysql
-
+from project.utils import placeholder_gen
 from project import PYMYSQL_CONFIG
 
 
@@ -93,7 +93,7 @@ def add_row(table: str, data: dict):
     keys = ', '.join(data.keys())
     vals = data.values()
     # generate the placeholders for the prepared SQL statement
-    value_placeholders = ', '.join("%s" for _ in vals)
+    value_placeholders = placeholder_gen(vals)
 
     # generate the SQL statement
     statement = "INSERT INTO %s (%s) VALUES(%s)" % (table, keys, value_placeholders)

@@ -1,38 +1,28 @@
-import hashlib
-
 from flask import url_for
 
-from project import email, models
+from project import email
 from project.exceptions.user_exceptions import EmailAlreadyVerified, InvalidVerification
-from project.models.users_model import get_email_verification
+from project.models import users_model
+from project.utils import hash_password
 
 
 def verify_login(username: str, password: str):
-    pass
-
-
-def hash_password(password, salt):
-    '''
-    hash a password with a salt
-    :param password:
-    :param salt:
-    :return:
-    '''
-    hash_object = hashlib.sha224(bytes(''.join((password, salt))))
-    return hash_object.hexdigest()
+    user = users_model.get_user(username)
+    inputted_password_hash = hash_password(password, user["password_salt"])
+    return inputted_password_hash == user["password_hash"]
 
 
 def send_email_verification(user_id: str):
-    verification_str = get_email_verification()
+    user = users_model.get_user(user_id, ["email_verification", "email"])
+    verification_str = user["email_verification"]
     verification_url = url_for("verify", user_id=user_id, verification_str=verification_str)
 
-
-    return email.send_email("Thank you for registering for Sherwyn's CS 166 Security Blog! Go to the following link to verify your email: %s" % verification_url)
+    return email.send_email("Thank you for registering for Sherwyn's CS 166 Security Blog! Go to the following link to verify your email: %s" % verification_url, user["email"])
 
 
 def verify_registration(user_id: str, url_string: str):
     # get the email verification string stored on the database
-    user_email_ver = get_email_verification(user_id)
+    user_email_ver = users_model.get_email_verification(user_id)
 
     # if there's nothing in the email_verified field, that means the user already registered
     if not user_email_ver:
@@ -43,4 +33,4 @@ def verify_registration(user_id: str, url_string: str):
         raise InvalidVerification
 
     # if the string is correct, set the database string to None to verify the user
-    models.set_sql("UPDATE users SET email_verification=NULL WHERE user_id=%s", [user_id])
+    users_model.set_user(user_id, "email_verification", "NULL")
