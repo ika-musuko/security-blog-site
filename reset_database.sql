@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS users
  user_id       VARCHAR(32) NOT NULL UNIQUE,
  join_date     DATETIME NOT NULL ,
  password_hash VARBINARY(255) NOT NULL ,
- password_salt VARBINARY(255) NOT NULL,
+ password_salt VARCHAR(255) NOT NULL,
  email         VARCHAR(128) NOT NULL ,
  role          VARCHAR(128) NOT NULL ,
  email_verification VARCHAR(255), # if null, email verified

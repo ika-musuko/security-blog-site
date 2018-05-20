@@ -20,4 +20,5 @@ def hash_password(password, salt):
     :return:
     '''
     hash_object = hashlib.sha224(''.join((password, salt)).encode())
-    return hash_object.hexdigest()
+    hash_code = hash_object.hexdigest()
+    return hash_code.encode()

@@ -1,6 +1,8 @@
 import os
 import smtplib
 def send_email(message: str, address: str):
+    # you gotta newline an email for some reason
+    message = '\n' + message
 
     # Credentials
     username = os.getenv("EMAIL_ADDRESS") or ''
