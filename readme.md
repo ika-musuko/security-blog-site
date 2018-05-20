@@ -13,25 +13,25 @@ I avoided using any SQL ORMs and rolled out my form verification as specified so
 
 Blog Site
 ---------
-- [ ] registration screen
-- [ ] login screen
-- [ ] blog list screen
+- [X] registration screen
+- [X] login screen
+- [X] blog list screen
 - normal user
     - [ ] add blog item
     - [ ] delete own blog item
 - admin user
     - [ ] delete any blog item
-- [ ] logout
+- [X] logout
 
 Security Features
 -----------------
-- [ ] **authentication**: hashed and salted passwords
+- [X] **authentication**: hashed and salted passwords
 - [ ] **authorization**: normal and admin roles implemented
 - [ ] **availability**: registration must have a captcha
-- [ ] **session management**: use sessions to correctly remember the user
+- [X] **session management**: use sessions to correctly remember the user
 - [ ] injection attack prevention (except for attack demo)
-- [ ] forms use POST method
-- [ ] forms have CSRF prevention (except for attack demo)
+- [X] forms use POST method
+- [X] forms have CSRF prevention (except for attack demo)
 
 
 Required Content
@@ -58,4 +58,4 @@ Bonus Features
 
 Cloud Deployment
 ---------------
-- [X] DigitalOcean Droplet on NGINX with ufw firewall
+- [ ] DigitalOcean Droplet on NGINX
