@@ -29,9 +29,11 @@
                             <li class="nav-item">
                                 <a class="nav-link text-light {% if active_page == 'index' %} active {% endif %}" href="{{ url_for('index') }}">Home</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-success {% if active_page == 'new_post' %} active {% endif %}" href="{{ url_for('new_post') }}">New Post</a>
-                            </li>
+                            {% if current_user %}
+                                <li class="nav-item">
+                                    <a class="nav-link text-success {% if active_page == 'new_post' %} active {% endif %}" href="{{ url_for('new_post') }}">New Post</a>
+                                </li>
+                            {% endif %}
                             <li class="nav-item">
                                 <a class="nav-link text-light {% if active_page == 'demos' %} active {% endif %}" href="{{ url_for('demos') }}">Security Demos</a>
                             </li>

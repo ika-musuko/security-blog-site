@@ -1,14 +1,17 @@
 from flask import render_template, url_for, request, flash
 from werkzeug.utils import redirect
 
+from project import utils
 import project.exceptions.user_exceptions
 import project.users.auth
 from project import app, recaptcha
 from project.users import sessions
-from project.views.view_utils import GETPOST, login_required, logout_required, email_unverified, email_verified
+from project.views.view_utils import GETPOST, login_required, logout_required, email_unverified
+from project.utils import check_valid_password
 from project.models import users_model
 
 from time import sleep
+
 
 @app.route("/login", methods=GETPOST)
 @logout_required
@@ -45,6 +48,10 @@ def register():
             confirm_password = request.form.get("confirm_password")
 
             # form verification
+            if not utils.check_valid_email_address(email):
+                flash("Please input a valid email address")
+                return redirect(url_for("register"))
+
             if any(len(field) == 0 for field in (username, email, password, confirm_password)):
                 flash("You cannot leave any of the fields blank.")
                 return redirect(url_for("register"))
@@ -80,8 +87,7 @@ def register():
 def resend_verification():
     cu = sessions.current_user()
     project.users.auth.send_email_verification(cu['user_id'])
-    email_name, email_address = cu['email'].split('@')
-    email_censored = "%s%s@%s" % (email_name[:2], ''.join(('*' for _ in range(len(email_name)-2))), email_address)
+    email_censored = utils.censor_email(cu['email'])
     flash("Email verification re-sent to %s" % email_censored)
     return redirect(url_for("index"))
 
@@ -108,14 +114,3 @@ def verify(username: str, verification_str: str):
         flash("You have already verified your email.")
         return redirect(url_for("index"))
 
-def check_valid_password(password: str) -> bool:
-
-    # check each condition individually to prevent linearization attack
-    password_conditions = [
-          len(password) > 7
-        , not (not any(c.isupper() for c in password)) # make sure that every character is checked and no short circuit happens
-        , not (not any(c.islower() for c in password))
-        , not (not any(c.isnumeric() for c in password))
-        , not (not any(c in "!@#$%^&*" for c in password))
-    ]
-    return all(password_conditions) # if all conditions are true

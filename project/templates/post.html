@@ -10,8 +10,10 @@
     <i>
         <p><strong>Posted on: </strong>{{ post['date_created'] }}</p>
         <p><strong>Author: </strong>{{ post['user_id'] }}</p>
+        {% include "post_manager.html" %}
     </i>
     </div>
+    &nbsp;
     <div class="post-content">
         {{ post['post_content'] }}
     </div>

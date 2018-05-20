@@ -21,10 +21,7 @@
         </p>
         <p>
             <a class="btn btn-sm btn-success" href="{{ url_for('post', number=post['post_id']) }}">View</a>
-            {% if current_user['role'] == 'admin' or post['user_id'] == current_user['user_id'] %}
-                <a class="btn btn-sm btn-warning" href="{{ url_for('edit_post', number=post['post_id']) }}">Edit</a>
-                <a class="btn btn-sm btn-danger" href="{{ url_for('delete_post', number=post['post_id']) }}">Delete</a>
-            {% endif %}
+            {% include "post_manager.html" %}
         </p>
     </div>
 </div>
