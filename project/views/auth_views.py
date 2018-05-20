@@ -1,9 +1,12 @@
-from flask import render_template, url_for, request, session, flash
+from flask import render_template, url_for, request, flash
 from werkzeug.utils import redirect
 
+import project.exceptions.user_exceptions
+import project.users.auth
 from project import app, recaptcha
-from project.views.view_utils import GETPOST, email_unverified, login_required, logout_required
-from project.models import users
+from project.users import sessions
+from project.views.view_utils import GETPOST, login_required, logout_required
+from project.models import users_model
 
 @app.route("/login", methods=GETPOST)
 @logout_required
@@ -16,7 +19,7 @@ def login():
         password = request.form.get("password")
         remember_me = request.form.get("remember_me")
 
-        if users.login_user(username, password, remember_me):
+        if sessions.login_user(username, password, remember_me):
             flash("You have successfully logged in as %s" % (username))
             return redirect(url_for("index"))
 
@@ -47,18 +50,19 @@ def register():
                 flash("The password and confirm password fields must be the same.")
                 return redirect(url_for("register"))
 
+            # password verification
             if not check_valid_password(password):
                 flash("This password is not valid. It must meet the following criteria: 8 more characters, contain both upper and lowercase letters, contain a number, and contain a symbol")
                 return redirect(url_for("register"))
 
             # send information to be verified on the database
             try:
-                if users.create_new_user(username, email, password):
+                if users_model.create_new_user(username, email, password):
                     flash("Thanks for signing up! Please verify your email and log in.")
-                    users.send_email_verification(username)
+                    project.users.auth.send_email_verification(username)
                     return redirect(url_for("index"))
 
-            except users.UserExistsException:
+            except project.exceptions.user_exceptions.UserExistsException:
                 flash("This user already exists. Please use a different username")
                 return redirect(url_for("register"))
 
@@ -71,8 +75,25 @@ def register():
 @app.route("/logout", methods=GETPOST)
 @login_required
 def logout():
+    sessions.logout_user()
     return redirect(url_for("index"))
 
+
+@app.route("/verify/<username>/<verification_str>", methods=GETPOST)
+def verify(username: str, verification_str: str):
+    try:
+        project.users.auth.verify_registration(username, verification_str)
+        flash("You have verified your email! You may log in now")
+        return redirect(url_for("login"))
+
+    except project.exceptions.user_exceptions.InvalidVerification:
+        flash("This is not a valid verification URL. Email has been resent.")
+        project.users.auth.send_email_verification(username)
+        return redirect(url_for("index"))
+
+    except project.exceptions.user_exceptions.EmailAlreadyVerified:
+        flash("You have already verified your email.")
+        return redirect(url_for("index"))
 
 def check_valid_password(password: str) -> bool:
 

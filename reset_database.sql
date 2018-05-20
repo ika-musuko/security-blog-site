@@ -10,6 +10,7 @@ SET FOREIGN_KEY_CHECKS=1;
 CREATE TABLE IF NOT EXISTS users
 (
  user_id       VARCHAR(32) NOT NULL UNIQUE,
+ join_date     DATETIME NOT NULL ,
  password_hash VARBINARY(255) NOT NULL ,
  password_salt VARBINARY(255) NOT NULL,
  email         VARCHAR(128) NOT NULL ,

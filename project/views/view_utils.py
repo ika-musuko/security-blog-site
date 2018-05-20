@@ -1,12 +1,14 @@
-import datetime
 import random
 import string
 from functools import wraps
 
-from flask import request, url_for
+from flask import request, url_for, flash
 from werkzeug.utils import redirect
 
+import datetime
+
 from project import app, POSTS_PER_PAGE
+from project.users import sessions
 
 GETPOST = ['GET', 'POST']
 GET = ['GET']
@@ -15,6 +17,12 @@ POST = ['POST']
 @app.context_processor
 def inject_posts_per_page():
     return dict(POSTS_PER_PAGE=POSTS_PER_PAGE)
+
+# set cookies on every request
+@app.after_request
+def set_cookie(resp):
+    resp.set_cookie(key="last_here", value=str(datetime.datetime.now()))
+    resp.set_cookie(key="last_page", value=request.referrer)
 
 # decorators
 def post_searcher(f):
@@ -34,14 +42,19 @@ def post_searcher(f):
 def login_required(f):
     @wraps(f)
     def inside(*args, **kwargs):
-        #todo: check if the user is logged in
+        if not sessions.current_user():
+            flash("You must login to access this content.")
+            return redirect(url_for("index"))
+
         return f(*args, **kwargs)
     return inside
 
 def logout_required(f):
     @wraps(f)
     def inside(*args, **kwargs):
-        #todo: check if the user is logged out
+        if sessions.current_user():
+            flash("You are already logged in.")
+            return redirect(url_for("index"))
         return f(*args, **kwargs)
     return inside
 
@@ -49,7 +62,7 @@ def logout_required(f):
 def email_unverified(f):
     @wraps(f)
     def inside(*args, **kwargs):
-        #todo: check if the user has NOT verified their email
+
         return f(*args, **kwargs)
     return inside
 
