@@ -1,9 +1,13 @@
 CS 166 Security Blog Web Application
 ====================================
 
-Blog website made in Flask without any other Flask extensions (aka, from scratch).<br/>
-python3.6<br/>
-server: nginx+uwsgi<br/>
+Blog website made in Flask for CS 166 discussing and demonstrating various topics in Information Security  
+I avoided using any SQL ORMs and rolled out my form verification as specified so I didn't have any unfair advantages against those using JSP and Apache.  
+
+###software stack
+- backend: python3.6/flask + mariadb
+- middle tier: nginx + uwsgi running on linux
+- frontend: html/css/js/bootstrap  
 !!! **INSTALL LINUX** !!!<br/>
 (i haven't tested this on windows so who knows how the dependencies will work)<br/>
 

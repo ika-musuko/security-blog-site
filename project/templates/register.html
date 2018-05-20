@@ -7,15 +7,16 @@
 {% block heading %}Register a New Account{% endblock %}
 {% block content %}
 <form method="POST">
-    <label for="email">Email</label>
-    <input class="form-control" name="email" type="text">
     <label for="username">Username</label>
     <input class="form-control" name="username" type="text">
+    <label for="email">Email</label>
+    <input class="form-control" name="email" type="text">
     <label for="password">Password</label>
     <input class="form-control" name="password" type="password">
     <label for="confirm_password">Confirm Password</label>
     <input class="form-control" name="confirm-password" type="password">
-    <h2>CAPTCHA!!!</h2>
+    <input id="csrf_token" name="csrf_token" type="hidden" value="{{ csrf_token() }}">
+    {{ recaptcha }}
     <input type="submit" class="btn btn-success top10" value="register →">
 </form>
 

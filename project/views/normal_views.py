@@ -7,8 +7,10 @@ routes for the normal views
 from flask import request, redirect, url_for, render_template
 import datetime
 
-from project import app
+from project import app, POSTS_PER_PAGE
 from project.views.view_utils import GETPOST, post_searcher, login_required, email_verified, postmaker
+
+from project import models
 
 
 @app.route('/', methods=GETPOST)
@@ -17,10 +19,10 @@ from project.views.view_utils import GETPOST, post_searcher, login_required, ema
 @post_searcher
 def index(page: int=1):
     # query the database for page*POSTS_PER_PAGE ~ (page+1)*POSTS_PER_PAGE
-    #todo
     total_posts = 41
     posts = postmaker(total_posts, page)
-
+    #posts = models.query_posts(start=page*POSTS_PER_PAGE, end=(page-1)*POSTS_PER_PAGE)
+    #total_posts = models.get_total_posts()
     return render_template("index.html", total_posts=total_posts, posts=posts, page=page)
 
 @app.route('/search/<keyword>', methods=GETPOST)

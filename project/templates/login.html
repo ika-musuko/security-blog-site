@@ -11,6 +11,9 @@
   <input class="form-control" name="username" type="text">
   <label for="password">Password</label>
   <input class="form-control" name="password" type="password">
+  <input id="csrf_token" name="csrf_token" type="hidden" value="{{ csrf_token() }}">
+  <label for="remember_me">Remember me</label>
+  <input class="form-control" name="remember_me" type="checkbox">
   <input type="submit" class="btn btn-primary top10" value="login →">
 </form>
 

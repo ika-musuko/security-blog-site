@@ -16,7 +16,6 @@ POST = ['POST']
 def inject_posts_per_page():
     return dict(POSTS_PER_PAGE=POSTS_PER_PAGE)
 
-
 # decorators
 def post_searcher(f):
     '''
