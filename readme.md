@@ -1,15 +1,22 @@
 # CS 166 Security Blog Web Application
 
-Blog website made in Flask for CS 166 discussing and demonstrating various topics in Information Security  
-I avoided using any SQL ORMs, rolled out my form verification, and handled sessions myself (as opposed to Flask-Login) as specified so I didn't have any unfair advantages against those using JSP and Apache.  
+This is a blog website made in Flask for CS 166 discussing and demonstrating various topics in Information Security  
+I avoided using any SQL ORMs, rolled out my form verification, and handled sessions myself (as opposed to using a third-party session management library such as Flask-Login) as specified so I didn't have any unfair advantages against those using JSP and Apache.  
+
 
 ## Software Stack
-It's not XAMPP, it's not LAMP, it's....LNUMP???  
+*It's not XAMPP, it's not LAMP, it's....LNUMP???*  
 - **L**inux
 - **N**ginx -> like Apache
 - **U**wsgi -> like Tomcat
 - **M**ariaDB
 - **P**ython (Flask) -> like Java/JSP
+
+I chose to use this stack because I have had prior experience with it (check out my latest project, [Suicide Chess](https://suicidechess.org)). However, I do recognize that my stack is slightly "modern" (aka, I get to cheat sometimes), but unlike most web frameworks, Flask is a micro-webframework, which means I am free to choose any architecture I want; Flask itself only provides URL routing, HTML templating (through Jinja2), and a primitive API for accessing sessions and cookies.  
+
+I have MariaDB manually set up and running as a service on the machine and I'm using a library called [PyMySQL](https://github.com/PyMySQL/PyMySQL) to interact with it. This library requires you to write raw SQL queries so I can use this to demonstrate SQL injection attacks and how to write secure SQL code. 
+
+Additionally, I chose Linux over Windows as I have more experience with Linux. I get control of every aspect of the system. This does result it in being easier to shoot yourself in the foot if you're not careful (for example, I accidentally deleted some MariaDB configuration files and spent about an hour trying to do a clean re-install) but I gain a better understanding of the overall architecture. I also believe that Linux's filesystem is more intuitive than Windows'.
 
 ## Grade Points
 ### Blog Site

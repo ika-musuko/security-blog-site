@@ -10,11 +10,11 @@
 <h5>Email verified: {{ not user["email_verification"] }}</h5>
 {% set role = user["role"] %}
 <h5>User Role: {{ role }}</h5>
-{% if current_user['role'] == 'admin' %}
+{% if current_user and current_user['user_id'] == 'sherwyn' %}
     {% if role == "admin" %}
-        <button class="btn btn-danger">Set as normal user</button>
+        <a href="{{ url_for('toggle_admin_status', username=username) }}" class="btn btn-danger">Set as normal user</a>
     {% else %}
-        <button class="btn btn-success">Set as admin user</button>
+        <a href="{{ url_for('toggle_admin_status', username=username) }}" class="btn btn-success">Set as admin user</a>
     {% endif %}
 {% endif %}
 {# <h2 class="top30">{{ username }}'s posts</h2>

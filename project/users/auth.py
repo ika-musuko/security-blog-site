@@ -19,7 +19,7 @@ def send_email_verification(user_id: str):
     user = users_model.get_user(user_id, ["email_verification", "email"])
     verification_str = user["email_verification"]
     try:
-        verification_url = url_for("verify", user_id=user_id, verification_str=verification_str, _external=True)
+        verification_url = url_for("verify", username=user_id, verification_str=verification_str, _external=True)
     except RuntimeError:
         verification_url = "SENT FROM TERMINAL: %s" % (verification_str)
 

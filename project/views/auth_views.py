@@ -5,7 +5,7 @@ import project.exceptions.user_exceptions
 import project.users.auth
 from project import app, recaptcha
 from project.users import sessions
-from project.views.view_utils import GETPOST, login_required, logout_required
+from project.views.view_utils import GETPOST, login_required, logout_required, email_unverified, email_verified
 from project.models import users_model
 
 from time import sleep
@@ -60,8 +60,9 @@ def register():
 
             # send information to be verified on the database
             if users_model.create_new_user(username, email, password):
-                flash("Thanks for signing up! Please verify your email and log in.")
+                flash("Thanks for signing up! Please check your email for a verification link.")
                 project.users.auth.send_email_verification(username)
+                sessions.login_user(username)
                 return redirect(url_for("index"))
 
             else:
@@ -73,6 +74,16 @@ def register():
 
     return render_template("register.html")
 
+@app.route("/resend_verification", methods=GETPOST)
+@login_required
+@email_unverified
+def resend_verification():
+    cu = sessions.current_user()
+    project.users.auth.send_email_verification(cu['user_id'])
+    email_name, email_address = cu['email'].split('@')
+    email_censored = "%s%s@%s" % (email_name[:2], ''.join(('*' for _ in range(len(email_name)-2))), email_address)
+    flash("Email verification re-sent to %s" % email_censored)
+    return redirect(url_for("index"))
 
 @app.route("/logout", methods=GETPOST)
 @login_required

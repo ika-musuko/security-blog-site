@@ -74,8 +74,8 @@ def logout_required(f):
 def email_unverified(f):
     @wraps(f)
     def inside(*args, **kwargs):
-        if not auth.is_email_verified(sessions.current_user_id()):
-            flash("Please verify your email before accessing this content.")
+        if auth.is_email_verified(sessions.current_user_id()):
+            flash("You have already verified your email.")
             return redirect(url_for("index"))
         return f(*args, **kwargs)
     return inside
@@ -83,8 +83,8 @@ def email_unverified(f):
 def email_verified(f):
     @wraps(f)
     def inside(*args, **kwargs):
-        if auth.is_email_verified(sessions.current_user_id()):
-            flash("You have already verified your email.")
+        if not auth.is_email_verified(sessions.current_user_id()):
+            flash("Please verify your email before accessing this content.")
             return redirect(url_for("index"))
         return f(*args, **kwargs)
     return inside
@@ -93,7 +93,20 @@ def email_verified(f):
 def admin_user(f):
     @wraps(f)
     def inside(*args, **kwargs):
-        #todo: check if the user is an admin
+        cu = sessions.current_user()
+        if cu['role'] != 'admin':
+            flash("You must be an admin to access this content.")
+            return redirect(url_for("index"))
+        return f(*args, **kwargs)
+    return inside
+
+
+def god_user(f):
+    @wraps(f)
+    def inside(*args, **kwargs):
+        if sessions.current_user_id() != "sherwyn":
+            flash("You are not authorized to do this.")
+            return redirect(request.referrer)
         return f(*args, **kwargs)
     return inside
 
