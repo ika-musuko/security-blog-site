@@ -16,7 +16,7 @@
             </tr>
             {% for user in users %}
             <tr>
-                <td><a href="{{ url_for('profile', username=user['user_id']) }}">{{ user['user_id'] }} →</a></td>
+                <td><a href="{{ url_for('profile', username=user['user_id'], page=1) }}">{{ user['user_id'] }} →</a></td>
                 <td>{{ user['join_date'] }}</td>
                 <td class="{% if user['role'] == 'admin' %}bg-success{% else %}bg-primary{% endif %} text-light">{{ user['role'] }}</td>
             </tr>

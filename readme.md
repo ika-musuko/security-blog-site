@@ -27,9 +27,9 @@ I chose Linux over Windows as I have more experience with Linux. I get control o
 - [X] blog list screen
 - normal user
     - [X] add blog item
-    - [ ] delete own blog item
+    - [X] delete own blog item
 - admin user
-    - [ ] delete any blog item
+    - [X] delete any blog item
 - [X] logout
 
 ### Security Features
@@ -60,7 +60,7 @@ I chose Linux over Windows as I have more experience with Linux. I get control o
 - [X] Bootstrap styling
 - [ ] Edit own post
 - [X] Two-step e-mail verification for new users
-- [ ] Markdown styling for blog posts
+- [X] Markdown styling for blog posts
 - [X] View all users
 
 ### Cloud Deployment

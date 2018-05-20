@@ -7,6 +7,7 @@ from werkzeug.utils import redirect
 import datetime
 
 from project import app, POSTS_PER_PAGE
+from project.models import posts_model
 from project.users import sessions, auth
 from project.utils import random_string
 
@@ -130,3 +131,7 @@ def postmaker(total_posts: int, page: int):
     return posts[ppage*POSTS_PER_PAGE:page*POSTS_PER_PAGE]
 
 
+def paginate_posts(page: int=1, user_id: int=None):
+    posts = posts_model.query_posts(start=page * POSTS_PER_PAGE, end=(page - 1) * POSTS_PER_PAGE, user_id=user_id)
+    total_posts = posts_model.get_total_posts()
+    return posts, total_posts

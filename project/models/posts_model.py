@@ -1,9 +1,14 @@
 from project import models
 import datetime
 
-def query_posts(start, end):
-    prepared_statement="SELECT post_id, title, date_created, preview, user_id FROM posts WHERE post_id < %s ORDER BY date_created DESC;"
-    return models.get_sql(prepared_statement, values=[start], amount=start-end)
+def query_posts(start, end, user_id: int=None):
+    if user_id:
+        prepared_statement="SELECT post_id, title, date_created, preview, user_id FROM posts WHERE post_id < %s AND user_id = %s ORDER BY date_created ASC;"
+        values = [start, user_id]
+    else:
+        prepared_statement="SELECT post_id, title, date_created, preview, user_id FROM posts WHERE post_id < %s ORDER BY date_created DESC;"
+        values = [start]
+    return models.get_sql(prepared_statement, values=values, amount=start-end)
 
 def get_post(post_id: int):
     prepared_statement="SELECT post_id, title, date_created, post_content, user_id FROM posts WHERE post_id = %s;"

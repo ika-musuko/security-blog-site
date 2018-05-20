@@ -17,7 +17,8 @@
         <a href="{{ url_for('toggle_admin_status', username=username) }}" class="btn btn-success">Set as admin user</a>
     {% endif %}
 {% endif %}
-{ <h2 class="top30">{{ username }}'s posts</h2>
-{% include "post_selector.html" %}
-({ populate_posts(posts) }} }
+ <h2 class="top30">{{ username }}'s posts</h2>
+{{ populate_posts(posts) }}
+    {# {% include "post_selector.html" %}
+{({ populate_posts(posts) }} } #}
 {% endblock %}
