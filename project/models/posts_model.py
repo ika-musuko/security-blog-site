@@ -22,3 +22,7 @@ def add_post(user_id: str, title: str, content: str):
         , "post_content" : content
 
     })
+
+def delete_post(post_id: int):
+    prepared_statement = "DELETE FROM posts WHERE post_id = %s;"
+    models.set_sql(prepared_statement, [post_id])

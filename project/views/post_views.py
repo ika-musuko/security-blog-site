@@ -84,7 +84,15 @@ def edit_post(number: int):
 @login_required
 @email_verified
 def delete_post(number: int):
-    return "DELETE post: %s" % number
+    cu = sessions.current_user()
+    post = posts_model.get_post(number)
+    if cu['role'] != 'admin' and cu['user_id'] != post['user_id']:
+        flash("You may not delete this post.")
+
+    else:
+        posts_model.delete_post(number)
+
+    return redirect(url_for("index"))
 
 
 @app.route("/privacy")
