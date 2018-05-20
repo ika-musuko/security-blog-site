@@ -3,6 +3,7 @@ from flask import url_for
 from project import email
 from project.exceptions.user_exceptions import EmailAlreadyVerified, InvalidVerification
 from project.models import users_model
+from project.models.users_model import get_email_verification
 from project.utils import hash_password
 
 
@@ -34,3 +35,12 @@ def verify_registration(user_id: str, url_string: str):
 
     # if the string is correct, set the database string to None to verify the user
     users_model.set_user(user_id, "email_verification", "NULL")
+
+
+def is_email_verified(user_id: str):
+    '''
+    basically, if the email verification string is None for the user, their email is verified
+    :param user_id:
+    :return:
+    '''
+    return not get_email_verification(user_id)

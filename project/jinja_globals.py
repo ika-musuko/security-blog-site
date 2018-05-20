@@ -1,8 +1,8 @@
-from project.utils import generate_random_string
+from project.utils import random_string
 
 
 def csrf_token():
-    return generate_random_string(length=64)
+    return random_string(length=64)
 
 
 

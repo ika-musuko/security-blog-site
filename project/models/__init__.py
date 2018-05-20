@@ -62,7 +62,7 @@ def set_sql_simple(statement: str):
     '''
     conn = db_connect()
     try:
-        with conn.cursor as cursor:
+        with conn.cursor() as cursor:
             cursor.execute(statement)
 
         conn.commit()
@@ -80,7 +80,7 @@ def set_sql(statement: str, values: list):
     '''
     conn = db_connect()
     try:
-        with conn.cursor as cursor:
+        with conn.cursor() as cursor:
             cursor.execute(statement, values)
 
         conn.commit()

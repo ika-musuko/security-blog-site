@@ -1,5 +1,4 @@
 import random
-import string
 from functools import wraps
 
 from flask import request, url_for, flash
@@ -8,7 +7,8 @@ from werkzeug.utils import redirect
 import datetime
 
 from project import app, POSTS_PER_PAGE
-from project.users import sessions
+from project.users import sessions, auth
+from project.utils import random_string
 
 GETPOST = ['GET', 'POST']
 GET = ['GET']
@@ -62,14 +62,18 @@ def logout_required(f):
 def email_unverified(f):
     @wraps(f)
     def inside(*args, **kwargs):
-
+        if not auth.is_email_verified(sessions.current_user()):
+            flash("Please verify your email before accessing this content.")
+            return redirect(url_for("index"))
         return f(*args, **kwargs)
     return inside
 
 def email_verified(f):
     @wraps(f)
     def inside(*args, **kwargs):
-        #todo: check if the user has verified their email
+        if auth.is_email_verified(sessions.current_user()):
+            flash("You have already verified your email.")
+            return redirect(url_for("index"))
         return f(*args, **kwargs)
     return inside
 
@@ -84,10 +88,6 @@ def admin_user(f):
 
 
 # other helpers
-def random_string(length: int):
-    return ''.join([random.choice(string.ascii_lowercase) for _ in range(length)])
-
-
 def postmaker(total_posts: int, page: int):
     total_posts = 41
 

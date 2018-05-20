@@ -8,7 +8,7 @@ def placeholder_gen(things: list):
 def comma_join(things: list):
     return ', '.join(things)
 
-def generate_random_string(length: int) -> str:
+def random_string(length: int) -> str:
     return ''.join((random.choice(string.ascii_letters+string.digits)) for _ in range(length))
 
 
