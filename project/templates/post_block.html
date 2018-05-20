@@ -13,7 +13,7 @@
             </div>
         </div>
         <p class="text-muted"><i>
-            Author: {{ post["user_id"] }}<br/>
+            Author: <a href="{{ url_for("profile", username=post["user_id"]) }}" }}>{{ post["user_id"] }}</a><br/>
             Published on: {{ post["date_created"] }}<br/>
         </i></p>
         <p class="post-preview">
@@ -21,8 +21,10 @@
         </p>
         <p>
             <a class="btn btn-sm btn-success" href="{{ url_for('post', number=post['post_id']) }}">View</a>
-            <a class="btn btn-sm btn-warning" href="{{ url_for('edit_post', number=post['post_id']) }}">Edit</a>
-            <a class="btn btn-sm btn-danger" href="{{ url_for('delete_post', number=post['post_id']) }}">Delete</a>
+            {% if current_user['role'] == 'admin' or post['user_id'] == current_user['user_id'] %}
+                <a class="btn btn-sm btn-warning" href="{{ url_for('edit_post', number=post['post_id']) }}">Edit</a>
+                <a class="btn btn-sm btn-danger" href="{{ url_for('delete_post', number=post['post_id']) }}">Delete</a>
+            {% endif %}
         </p>
     </div>
 </div>

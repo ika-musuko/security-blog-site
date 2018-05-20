@@ -11,3 +11,7 @@ def get_post(post_id: int):
 
 def get_total_posts():
     return models.get_sql_simple(statement="SELECT COUNT(post_id) FROM posts;", amount=1)["COUNT(post_id)"]
+
+def add_post(user_id: str):
+    # models.add_row("posts", {"title": "Hello Friends!", "date_created": datetime.datetime.now(), "preview": "Hello hello...", "user_id": "sherwyn", "post_content": "Hello hello hello"})
+    pass

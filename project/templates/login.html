@@ -6,11 +6,11 @@
 {% block head %}{% endblock %}
 {% block heading %}Login{% endblock %}
 {% block content %}
-<form method="POST">
+<form method="POST" autocomplete="off">
   <label for="username">Username</label>
-  <input class="form-control" name="username" type="text">
+  <input class="form-control" name="username" type="text" autocomplete="no_autocomplete">
   <label for="password">Password</label>
-  <input class="form-control" name="password" type="password">
+  <input class="form-control" name="password" type="password" autocomplete="no_autocomplete">
   <input id="csrf_token" name="csrf_token" type="hidden" value="{{ csrf_token() }}">
   <label for="remember_me">Remember me</label>
   <input class="form-control" name="remember_me" type="checkbox">

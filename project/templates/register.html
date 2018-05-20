@@ -6,15 +6,15 @@
 {% block head %}{% endblock %}
 {% block heading %}Register a New Account{% endblock %}
 {% block content %}
-<form method="POST">
+<form method="POST" autocomplete="off">
     <label for="username">Username</label>
-    <input class="form-control" name="username" type="text">
+    <input class="form-control" name="username" type="text" autocomplete="no_autocomplete">
     <label for="email">Email</label>
-    <input class="form-control" name="email" type="text">
+    <input class="form-control" name="email" type="text" autocomplete="no_autocomplete">
     <label for="password">Password</label>
-    <input class="form-control" name="password" type="password">
+    <input class="form-control" name="password" type="password" autocomplete="no_autocomplete">
     <label for="confirm_password">Confirm Password</label>
-    <input class="form-control" name="confirm_password" type="password">
+    <input class="form-control" name="confirm_password" type="password" autocomplete="no_autocomplete">
     <input id="csrf_token" name="csrf_token" type="hidden" value="{{ csrf_token() }}">
     {{ recaptcha }}
     <input type="submit" class="btn btn-success top10" value="register →">

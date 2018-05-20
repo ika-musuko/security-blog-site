@@ -7,26 +7,28 @@ routes for the normal views
 from flask import redirect, url_for, render_template, flash
 import datetime
 
-from project.models import posts_model
+from project.models import posts_model, users_model
 from project import app, POSTS_PER_PAGE
 from project.views.view_utils import GETPOST, post_searcher, login_required, email_verified, postmaker
+from project.users import sessions
 
+def paginate_posts(page: int=1):
+    posts = posts_model.query_posts(start=page * POSTS_PER_PAGE, end=(page - 1) * POSTS_PER_PAGE)
+    total_posts = posts_model.get_total_posts()
+    return posts, total_posts
 
 @app.route('/', methods=GETPOST)
 @app.route('/index/', methods=GETPOST)
 @app.route('/index/<int:page>', methods=GETPOST)
-@post_searcher
 def index(page: int=1):
     # query the database for page*POSTS_PER_PAGE ~ (page+1)*POSTS_PER_PAGE
     #total_posts = 41
     #posts = postmaker(total_posts, page)
-    posts = posts_model.query_posts(start=page * POSTS_PER_PAGE, end=(page - 1) * POSTS_PER_PAGE)
-    total_posts = posts_model.get_total_posts()
+    posts, total_posts = paginate_posts(page)
     return render_template("index.html", total_posts=total_posts, posts=posts, page=page)
 
 @app.route('/search/<keyword>', methods=GETPOST)
 @app.route('/search/<keyword>/<int:page>', methods=GETPOST)
-@post_searcher
 def search(keyword: str, page: int=1):
     # query the database for page*POSTS_PER_PAGE ~ (page+1)*POSTS_PER_PAGE
     #todo
@@ -40,17 +42,24 @@ def search(keyword: str, page: int=1):
 @login_required
 def your_profile():
     # redirect to current user's profile page
-    return redirect(url_for("profile", username="username", page=1))
+    return redirect(url_for("profile", username=sessions.current_user_id(), page=1))
 
 
 @app.route("/profile/<username>")
 def profile(username: str):
-    user = {
-          "join_date" : datetime.datetime.today()
-        , "email_verified": True
-        , "admin_status" : True
-    }
-    return render_template("profile.html", username=username, user=user)
+    #user = {
+    #      "join_date" : datetime.datetime.today()
+    #    , "email_verified": True
+    #    , "admin_status" : True
+    #}
+    user = users_model.get_user(username)
+    # if the user exists, show their profile
+    if user:
+        #user_posts = posts_model.get_user_posts(username)
+
+        return render_template("profile.html", username=username, user=user)
+    flash("User %s does not exist." % username)
+    return redirect(url_for("index"))
 
 
 @app.route("/post/<int:number>")

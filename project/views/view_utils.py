@@ -14,12 +14,17 @@ GETPOST = ['GET', 'POST']
 GET = ['GET']
 POST = ['POST']
 
+# template variable injections
 @app.context_processor
 def inject_posts_per_page():
     return dict(POSTS_PER_PAGE=POSTS_PER_PAGE)
 
 @app.context_processor
 def inject_login_session():
+    return dict(current_user_id=sessions.current_user_id())
+
+@app.context_processor
+def inject_current_user():
     return dict(current_user=sessions.current_user())
 
 # set cookies on every request
@@ -49,7 +54,7 @@ def post_searcher(f):
 def login_required(f):
     @wraps(f)
     def inside(*args, **kwargs):
-        if not sessions.current_user():
+        if not sessions.current_user_id():
             flash("You must login to access this content.")
             return redirect(url_for("index"))
 
@@ -59,7 +64,7 @@ def login_required(f):
 def logout_required(f):
     @wraps(f)
     def inside(*args, **kwargs):
-        if sessions.current_user():
+        if sessions.current_user_id():
             flash("You are already logged in.")
             return redirect(url_for("index"))
         return f(*args, **kwargs)
@@ -69,7 +74,7 @@ def logout_required(f):
 def email_unverified(f):
     @wraps(f)
     def inside(*args, **kwargs):
-        if not auth.is_email_verified(sessions.current_user()):
+        if not auth.is_email_verified(sessions.current_user_id()):
             flash("Please verify your email before accessing this content.")
             return redirect(url_for("index"))
         return f(*args, **kwargs)
@@ -78,7 +83,7 @@ def email_unverified(f):
 def email_verified(f):
     @wraps(f)
     def inside(*args, **kwargs):
-        if auth.is_email_verified(sessions.current_user()):
+        if auth.is_email_verified(sessions.current_user_id()):
             flash("You have already verified your email.")
             return redirect(url_for("index"))
         return f(*args, **kwargs)
