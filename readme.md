@@ -1,9 +1,9 @@
-#CS 166 Security Blog Web Application
+# CS 166 Security Blog Web Application
 
 Blog website made in Flask for CS 166 discussing and demonstrating various topics in Information Security  
 I avoided using any SQL ORMs, rolled out my form verification, and handled sessions myself (as opposed to Flask-Login) as specified so I didn't have any unfair advantages against those using JSP and Apache.  
 
-##Software Stack
+## Software Stack
 It's not XAMPP, it's not LAMP, it's....LNUMP???  
 - **L**inux
 - **N**ginx -> like Apache
@@ -11,8 +11,8 @@ It's not XAMPP, it's not LAMP, it's....LNUMP???
 - **M**ariaDB
 - **P**ython (Flask) -> like Java/JSP
 
-##Grade Points
-###Blog Site
+## Grade Points
+### Blog Site
 - [X] registration screen
 - [X] login screen
 - [X] blog list screen
@@ -23,7 +23,7 @@ It's not XAMPP, it's not LAMP, it's....LNUMP???
     - [ ] delete any blog item
 - [X] logout
 
-###Security Features
+### Security Features
 - [X] **authentication**: hashed and salted passwords
 - [ ] **authorization**: normal and admin roles implemented
 - [ ] **availability**: registration must have a captcha
@@ -33,29 +33,29 @@ It's not XAMPP, it's not LAMP, it's....LNUMP???
 - [X] forms have CSRF prevention (except for attack demo)
 
 
-###Required Content
+### Required Content
 - first blog item by me talking about how i made this
     - [ ] firewall rules
     - [ ] info about security features
 - [ ] footer with privacy statement page
 - [ ] at least 3 other CS 166 relevant blog items
 
-###Feature Demonstrations
+### Feature Demonstrations
 - [ ] SQL injection attack demo and how to prevent it
 - [ ] XSS injection attack and possible defenses
 - [ ] website defacing
 - [ ] demonstrate how cookies work
 - [ ] demonstrate how session management works
  
-###Bonus Features
+### Bonus Features
 - [X] Bootstrap styling
 - [ ] Edit own post
 - [X] Two-step e-mail verification for new users
 
-###Cloud Deployment
+### Cloud Deployment
 - [ ] DigitalOcean Droplet on NGINX
 
-##Install Instructions
+## Install Instructions
 
 Dependencies:
 - Python 3.6
