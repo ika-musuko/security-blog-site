@@ -25,10 +25,10 @@ It's not XAMPP, it's not LAMP, it's....LNUMP???
 
 ### Security Features
 - [X] **authentication**: hashed and salted passwords
-- [ ] **authorization**: normal and admin roles implemented
-- [ ] **availability**: registration must have a captcha
+- [X] **authorization**: normal and admin roles implemented
+- [X] **availability**: registration must have a captcha
 - [X] **session management**: use sessions to correctly remember the user
-- [ ] injection attack prevention (except for attack demo)
+- [X] injection attack prevention (except for attack demo)
 - [X] forms use POST method
 - [X] forms have CSRF prevention (except for attack demo)
 
