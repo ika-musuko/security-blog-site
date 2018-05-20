@@ -71,7 +71,13 @@
 
             <div class="row">
                 <footer class="col-md-12 text-muted">
-                    Copyright Sherwyn Sen 2018. <a href="{{ url_for('privacy') }}">Privacy Statement</a>
+                    {% if request.cookies.get('last_here') %}
+                        <h6>Last visit was: {{ request.cookies.get('last_here') }}</h6>
+                    {% endif %}
+                    {% if request.cookies.get('last_page') %}
+                        <h6>You were on page: {{ request.cookies.get('last_page') }}</h6>
+                    {% endif %}
+                    <h6>Sherwyn Sen 2018. <a href="{{ url_for('privacy') }}">Privacy Statement</a></h6>
                 </footer>
             </div>
         </div>

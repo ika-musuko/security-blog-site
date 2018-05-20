@@ -22,8 +22,7 @@ def inject_posts_per_page():
 @app.after_request
 def set_cookie(resp):
     resp.set_cookie(key="last_here", value=str(datetime.datetime.now()))
-    if request.referrer:
-        resp.set_cookie(key="last_page", value=request.referrer)
+    resp.set_cookie(key="last_page", value=request.base_url)
 
     print(session)
     return resp
