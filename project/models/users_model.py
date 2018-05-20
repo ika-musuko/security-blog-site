@@ -6,10 +6,14 @@ import datetime
 
 def get_user(username: str, columns: list=None):
     columns_formatted = comma_join(columns) if columns else '*'
-    return models.get_sql(statement="SELECT {} FROM users WHERE user_id=%s".format(columns_formatted), values=[username], amount=1)
+    return models.get_sql(statement="SELECT {} FROM users WHERE user_id=%s;".format(columns_formatted), values=[username], amount=1)
 
 def set_user(username: str, column: str, value):
-    models.set_sql("UPDATE users SET {}=%s WHERE user_id=%s".format(column), [value, username])
+    models.set_sql("UPDATE users SET {}=%s WHERE user_id=%s;".format(column), [value, username])
+
+def get_all_users(columns: list=None):
+    columns_formatted = comma_join(columns) if columns else '*'
+    return models.get_sql_simple(statement="SELECT {} FROM users;".format(columns_formatted), amount=models.FETCHALL)
 
 def check_user_exists(user_id: str):
     '''

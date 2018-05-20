@@ -2,6 +2,7 @@ import pymysql
 from project.utils import sql_placeholder_gen
 from project import PYMYSQL_CONFIG
 
+FETCHALL = -1
 
 def db_connect():
     return pymysql.connect(**PYMYSQL_CONFIG)

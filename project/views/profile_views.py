@@ -7,6 +7,12 @@ from project.users import sessions
 from project.views.view_utils import login_required, admin_user, god_user
 
 
+@app.route("/all_users")
+def all_users():
+    every_user = users_model.get_all_users(["user_id", "join_date", "role"])
+    return render_template("all_users.html", users=every_user)
+
+
 @app.route("/your_profile")
 @login_required
 def your_profile():

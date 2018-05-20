@@ -58,6 +58,8 @@ I chose Linux over Windows as I have more experience with Linux. I get control o
 - [X] Bootstrap styling
 - [ ] Edit own post
 - [X] Two-step e-mail verification for new users
+- [ ] Markdown styling for blog posts
+- [ ] View all users
 
 ### Cloud Deployment
 - [ ] DigitalOcean Droplet on NGINX

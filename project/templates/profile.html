@@ -12,7 +12,7 @@
 <h5>User Role: {{ role }}</h5>
 {% if current_user and current_user['user_id'] == 'sherwyn' %}
     {% if role == "admin" %}
-        <a href="{{ url_for('toggle_admin_status', username=username) }}" class="btn btn-danger">Set as normal user</a>
+        <a href="{{ url_for('toggle_admin_status', username=username) }}" class="btn btn-primary">Set as normal user</a>
     {% else %}
         <a href="{{ url_for('toggle_admin_status', username=username) }}" class="btn btn-success">Set as admin user</a>
     {% endif %}
