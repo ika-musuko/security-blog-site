@@ -3,7 +3,7 @@
     <label for="title">Post Title</label>
     <input class="form-control" name="title" type="text" value="{{ title }}">
     <label for="content">Content</label>
-    <textarea class="form-control" name="content" rows="10"></textarea>
+    <textarea class="form-control" name="content" rows="10">{{ content }}</textarea>
     <input type="submit" class="btn btn-success top10" value="post →">
     <input id="csrf_token" name="csrf_token" type="hidden" value="{{ csrf_token() }}">
 </form>

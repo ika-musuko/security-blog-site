@@ -70,11 +70,37 @@ def new_post():
 
     return render_template("new_post.html", title=title, content=content)
 
+def check_own_post(post_id: int) -> bool:
+    cu = sessions.current_user()
+    post = posts_model.get_post(post_id)
+    return cu['user_id'] == post['user_id']
+
+
 @app.route("/edit_post/<int:number>")
 @login_required
 @email_verified
 def edit_post(number: int):
-    return render_template("edit_post.html", number=number)
+    if not check_own_post:
+        flash("You may not edit this post.")
+        return redirect(url_for("index"))
+
+    post = posts_model.get_post(number)
+    title, content = post['title'], post['post_content']
+
+    if request.method == "POST":
+        title = request.form.get("title")
+        content = request.form.get("content")
+
+        if not title:
+            flash("Please title your post.")
+            return redirect(url_for("edit_post", number=number, title=title, content=content))
+
+        if not content:
+            flash("Please write some content.")
+            return redirect(url_for("edit_post", number=number, title=title, content=content))
+
+
+    return render_template("edit_post.html", number=number, title=title, content=content)
 
 
 @app.route("/delete_post/<int:number>")
@@ -82,8 +108,7 @@ def edit_post(number: int):
 @email_verified
 def delete_post(number: int):
     cu = sessions.current_user()
-    post = posts_model.get_post(number)
-    if cu['role'] != 'admin' and cu['user_id'] != post['user_id']:
+    if not check_own_post(number) and cu['role'] != 'admin':
         flash("You may not delete this post.")
 
     else:
