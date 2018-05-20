@@ -1,7 +1,7 @@
 import random
 from functools import wraps
 
-from flask import request, url_for, flash
+from flask import request, url_for, flash, session
 from werkzeug.utils import redirect
 
 import datetime
@@ -22,7 +22,11 @@ def inject_posts_per_page():
 @app.after_request
 def set_cookie(resp):
     resp.set_cookie(key="last_here", value=str(datetime.datetime.now()))
-    resp.set_cookie(key="last_page", value=request.referrer)
+    if request.referrer:
+        resp.set_cookie(key="last_page", value=request.referrer)
+
+    print(session)
+    return resp
 
 # decorators
 def post_searcher(f):

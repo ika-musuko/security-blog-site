@@ -22,7 +22,7 @@ def login_user(username: str, password: str, remember_me: bool) -> bool:
 
 def logout_user():
     # remove the user from the session
-    session.pop(current_user(), None)
+    session.clear()
 
 
 def current_user():
