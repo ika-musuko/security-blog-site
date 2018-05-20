@@ -22,6 +22,11 @@ PYMYSQL_CONFIG = {
 POSTS_PER_PAGE = 5
 
 # recaptcha initialization
+app.config.update({
+      "RECAPTCHA_SITE_KEY" : os.getenv("RECAPTCHA_SITE_KEY") or ''
+    , "RECAPTCHA_SECRET_KEY": os.getenv("RECAPTCHA_SECRET_KEY") or ''
+    , "RECAPTCHA_ENABLED" : True
+})
 recaptcha = ReCaptcha()
 recaptcha.init_app(app)
 

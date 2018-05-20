@@ -37,22 +37,36 @@
                             </li>
                         </ul>
                         <ul class="nav navbar-right">
-                            <li class="nav-item dropdown ml-auto">
-                                <a class="nav-link border border-primary rounded text-primary" href="{{ url_for('login') }}">login</a>
-                            </li>
-                            <li class="nav-item dropdown ml-auto">
-                                <a class="nav-link border border-success rounded text-success" href="{{ url_for('register') }}">register</a>
-                            </li>
-                            <li class="nav-item dropdown ml-auto">
-                                <a class="nav-link text-light border-light rounded border" href="{{ url_for('your_profile') }}">username's profile</a>
-                            </li>
-                            <li class="nav-item dropdown ml-auto">
-                                <a class="nav-link text-danger border border-danger rounded" href="{{ url_for('logout') }}">logout</a>
-                            </li>
+                            {% if not current_user %}
+                                <li class="nav-item dropdown ml-auto">
+                                    <a class="nav-link border border-primary rounded text-primary" href="{{ url_for('login') }}">login</a>
+                                </li>
+                                <li class="nav-item dropdown ml-auto">
+                                    <a class="nav-link border border-success rounded text-success" href="{{ url_for('register') }}">register</a>
+                                </li>
+                            {% else %}
+                                <li class="nav-item dropdown ml-auto">
+                                    <a class="nav-link text-light border-light rounded border" href="{{ url_for('your_profile') }}">profile</a>
+                                </li>
+                                <li class="nav-item dropdown ml-auto">
+                                    <a class="nav-link text-danger border border-danger rounded" href="{{ url_for('logout') }}">logout</a>
+                                </li>
+                            {% endif %}
                         </ul>
                     </div>
                 </div>
             </div>
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    <div class="flash alert alert-info">
+                        <ul class="flashes">
+                            {% for message in messages %}
+                                <li>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                {% endwith %}
             <div class="row top10">
                 {# content #}
                 <div class="col-md-12 content">

@@ -29,7 +29,7 @@ def create_new_user(user_id: str, email: str, password: str):
     :return:
     '''
     if check_user_exists(user_id):
-        raise UserExistsException
+        return False
 
     # create a password salt for this user
     password_salt = random_string(30)
@@ -50,6 +50,7 @@ def create_new_user(user_id: str, email: str, password: str):
         , "role" : "user"
         , "email_verification" : email_verification
     })
+    return True
 
 
 def get_email_verification(user_id: str):

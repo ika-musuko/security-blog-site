@@ -18,6 +18,10 @@ POST = ['POST']
 def inject_posts_per_page():
     return dict(POSTS_PER_PAGE=POSTS_PER_PAGE)
 
+@app.context_processor
+def inject_login_session():
+    return dict(current_user=sessions.current_user())
+
 # set cookies on every request
 @app.after_request
 def set_cookie(resp):

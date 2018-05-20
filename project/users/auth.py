@@ -9,6 +9,8 @@ from project.utils import hash_password
 
 def verify_login(username: str, password: str):
     user = users_model.get_user(username)
+    if not user:
+        return False
     inputted_password_hash = hash_password(password, user["password_salt"])
     return inputted_password_hash == user["password_hash"]
 

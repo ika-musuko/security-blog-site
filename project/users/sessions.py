@@ -12,12 +12,14 @@ def login_user(username: str, password: str, remember_me: bool) -> bool:
     :return:
     '''
     if not verify_login(username, password):
+
         return False
 
     # now store the data to the session
     session['user_id'] = username
     if remember_me:
         session['remember_me'] = True
+    return True
 
 
 def logout_user():

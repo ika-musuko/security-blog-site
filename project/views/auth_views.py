@@ -8,6 +8,8 @@ from project.users import sessions
 from project.views.view_utils import GETPOST, login_required, logout_required
 from project.models import users_model
 
+from time import sleep
+
 @app.route("/login", methods=GETPOST)
 @logout_required
 def login():
@@ -24,6 +26,7 @@ def login():
             return redirect(url_for("index"))
 
         # login failed
+        sleep(5) # make failed users wait
         flash("Your credentials are incorrect.")
 
     return render_template("login.html")
@@ -56,13 +59,12 @@ def register():
                 return redirect(url_for("register"))
 
             # send information to be verified on the database
-            try:
-                if users_model.create_new_user(username, email, password):
-                    flash("Thanks for signing up! Please verify your email and log in.")
-                    project.users.auth.send_email_verification(username)
-                    return redirect(url_for("index"))
+            if users_model.create_new_user(username, email, password):
+                flash("Thanks for signing up! Please verify your email and log in.")
+                project.users.auth.send_email_verification(username)
+                return redirect(url_for("index"))
 
-            except project.exceptions.user_exceptions.UserExistsException:
+            else:
                 flash("This user already exists. Please use a different username")
                 return redirect(url_for("register"))
 
