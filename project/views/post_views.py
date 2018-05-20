@@ -1,17 +1,15 @@
 '''
-normal_views.py
+post_views.py
 
 routes for the normal views
 '''
 
-from flask import request, redirect, url_for, render_template
+from flask import redirect, url_for, render_template, flash
 import datetime
 
-import project.models.posts_model
+from project.models import posts_model
 from project import app, POSTS_PER_PAGE
 from project.views.view_utils import GETPOST, post_searcher, login_required, email_verified, postmaker
-
-from project import models
 
 
 @app.route('/', methods=GETPOST)
@@ -22,8 +20,8 @@ def index(page: int=1):
     # query the database for page*POSTS_PER_PAGE ~ (page+1)*POSTS_PER_PAGE
     #total_posts = 41
     #posts = postmaker(total_posts, page)
-    posts = project.models.posts_model.query_posts(start=page * POSTS_PER_PAGE, end=(page - 1) * POSTS_PER_PAGE)
-    total_posts = project.models.posts_model.get_total_posts()
+    posts = posts_model.query_posts(start=page * POSTS_PER_PAGE, end=(page - 1) * POSTS_PER_PAGE)
+    total_posts = posts_model.get_total_posts()
     return render_template("index.html", total_posts=total_posts, posts=posts, page=page)
 
 @app.route('/search/<keyword>', methods=GETPOST)
@@ -54,15 +52,16 @@ def profile(username: str):
     }
     return render_template("profile.html", username=username, user=user)
 
-@app.route("/demos")
-def demos():
-    return render_template("demos.html")
-
 
 @app.route("/post/<int:number>")
 def post(number: int):
-    return "post: %s" % number
-
+    post = posts_model.get_post(post_id=number)
+    # the post does exist
+    if post:
+        return render_template("post.html", number=number, post=post)
+    # the post does not exist
+    flash("Post %s does not exist" % number)
+    return redirect(url_for("index"))
 
 @app.route("/new_post", methods=GETPOST)
 @login_required

@@ -34,4 +34,4 @@ recaptcha.init_app(app)
 # global jinja functions
 app.jinja_env.globals.update(**jinja_globals.JINJA_GLOBALS)
 
-from project.views import auth_views, normal_views, error_views, view_utils
+from project.views import auth_views, post_views, error_views, demo_views, view_utils

@@ -8,21 +8,21 @@
             </div>
             <div class="col-md-1">
                 <h5 class="text-light"><i>
-                    #{{ post["id"] }}</i>
+                    #{{ post["post_id"] }}</i>
                 </h5>
             </div>
         </div>
         <p class="text-muted"><i>
-            Author: {{ post["author"] }}<br/>
-            Published on: {{ post["published_on"] }}<br/>
+            Author: {{ post["user_id"] }}<br/>
+            Published on: {{ post["date_created"] }}<br/>
         </i></p>
         <p class="post-preview">
             {{ post["preview"] }}{% if post["preview"]|length >= 100 %}...{% endif %}
         </p>
         <p>
-            <a class="btn btn-success" href="{{ url_for('post', number=post['id']) }}">View</a>
-            <a class="btn btn-sm btn-warning" href="{{ url_for('edit_post', number=post['id']) }}">Edit</a>
-            <a class="btn btn-sm btn-danger" href="{{ url_for('delete_post', number=post['id']) }}">Delete</a>
+            <a class="btn btn-sm btn-success" href="{{ url_for('post', number=post['post_id']) }}">View</a>
+            <a class="btn btn-sm btn-warning" href="{{ url_for('edit_post', number=post['post_id']) }}">Edit</a>
+            <a class="btn btn-sm btn-danger" href="{{ url_for('delete_post', number=post['post_id']) }}">Delete</a>
         </p>
     </div>
 </div>

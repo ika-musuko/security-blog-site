@@ -1,1 +1,19 @@
 {# full view of a blog post #}
+{% extends "base.html" %}
+{% set active_page="post" %}
+
+{% block title %}{{ post['title'] }}{% endblock %}
+{% block head %}{% endblock %}
+{% block heading %}{{ post['title'] }}{% endblock %}
+{% block content %}
+    <div class="post-header text-muted container rounded border-left border-success">
+    <i>
+        <p><strong>Posted on: </strong>{{ post['date_created'] }}</p>
+        <p><strong>Author: </strong>{{ post['user_id'] }}</p>
+    </i>
+    </div>
+    <div class="post-content">
+        {{ post['post_content'] }}
+    </div>
+{% endblock %}
+
