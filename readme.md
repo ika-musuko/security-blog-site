@@ -12,7 +12,9 @@ I avoided using any SQL ORMs, rolled out my own form verification, and handled s
 - **M**ariaDB
 - **P**ython (Flask) -> like Java/JSP
 
-I chose to use this stack because I have had prior experience with it (check out my latest project, [Suicide Chess](https://suicidechess.org)). However, I do recognize that my stack is slightly "modern" (aka, I get to cheat sometimes), but unlike most web frameworks, Flask is a micro-webframework, which means I am free to choose any architecture I want; Flask itself only provides URL routing, HTML templating (through Jinja2), and a primitive API for accessing sessions and cookies.  
+I chose to use this stack because I have had prior experience with it (check out my latest project, [Suicide Chess](https://suicidechess.org)). However, I do recognize that my stack is slightly "modern" (aka, I get to cheat sometimes), but unlike most web frameworks, Flask is a micro-webframework, which means I am free to choose any architecture I want; Flask itself only provides URL routing, HTML templating (through Jinja2), and a primitive API for accessing sessions and cookies. 
+
+ 
 
 I have MariaDB manually set up and running as a service on the machine and I'm using a library called [PyMySQL](https://github.com/PyMySQL/PyMySQL) to interact with it. This library requires you to write raw SQL queries so I can use this to demonstrate SQL injection attacks and how to write secure SQL code. I argue that my software stack is even *closer* to what's actually going on as I don't get a nice GUI like XAMPP where I can start and stop services with a click of a button (not that there's anything wrong with that). Additionally, I can monitor the database by running `$ mysql` and run custom queries for testing.
 
@@ -24,7 +26,7 @@ I chose Linux over Windows as I have more experience with Linux. I get control o
 - [X] login screen
 - [X] blog list screen
 - normal user
-    - [ ] add blog item
+    - [X] add blog item
     - [ ] delete own blog item
 - admin user
     - [ ] delete any blog item
@@ -59,7 +61,7 @@ I chose Linux over Windows as I have more experience with Linux. I get control o
 - [ ] Edit own post
 - [X] Two-step e-mail verification for new users
 - [ ] Markdown styling for blog posts
-- [ ] View all users
+- [X] View all users
 
 ### Cloud Deployment
 - [ ] DigitalOcean Droplet on NGINX

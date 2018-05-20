@@ -4,11 +4,12 @@ post_views.py
 routes for the normal views
 '''
 
-from flask import redirect, url_for, render_template, flash
+from flask import redirect, url_for, render_template, flash, request
 
 from project.models import posts_model
 from project import app, POSTS_PER_PAGE
 from project.views.view_utils import GETPOST, login_required, email_verified, postmaker
+from project.users import sessions
 
 
 def paginate_posts(page: int=1):
@@ -51,7 +52,26 @@ def post(number: int):
 @login_required
 @email_verified
 def new_post():
-    return render_template("new_post.html")
+    title = ''
+    content = ''
+    if request.method == "POST":
+        title = request.form.get("title")
+        content = request.form.get("content")
+
+        if not title:
+            flash("Please title your post.")
+            return redirect(url_for("new_post", title=title, content=content))
+
+        if not content:
+            flash("Please write some content.")
+            return redirect(url_for("new_post", title=title, content=content))
+
+        posts_model.add_post(sessions.current_user_id(), title, content)
+        flash("Your post has been submitted.")
+        return redirect(url_for('index'))
+
+
+    return render_template("new_post.html", title=title, content=content)
 
 @app.route("/edit_post/<int:number>")
 @login_required

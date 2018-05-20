@@ -2,6 +2,15 @@
     --right-margins: 60px;
 }
 
+.post-line {
+    display: block;
+}
+
+.post-body {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
 body {
     padding: 0;
 }

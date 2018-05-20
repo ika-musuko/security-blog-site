@@ -3,7 +3,7 @@ from project.users.auth import verify_login
 from project.models import users_model
 
 
-def login_user(username: str, password: str, remember_me: bool) -> bool:
+def login_user(username: str, password: str, remember_me: bool=False) -> bool:
     '''
     check if the user's credentials are correct and then store their info to a session
 
@@ -13,7 +13,6 @@ def login_user(username: str, password: str, remember_me: bool) -> bool:
     :return:
     '''
     if not verify_login(username, password):
-
         return False
 
     # now store the data to the session

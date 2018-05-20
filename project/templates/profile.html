@@ -10,7 +10,7 @@
 <h5>Email verified: {{ not user["email_verification"] }}</h5>
 {% set role = user["role"] %}
 <h5>User Role: {{ role }}</h5>
-{% if current_user and current_user['user_id'] == 'sherwyn' %}
+{% if current_user and (current_user['user_id'] in ('sherwyn', 'cs166_admin')) %}
     {% if role == "admin" %}
         <a href="{{ url_for('toggle_admin_status', username=username) }}" class="btn btn-primary">Set as normal user</a>
     {% else %}

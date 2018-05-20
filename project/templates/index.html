@@ -4,8 +4,9 @@
 
 {% block title %}Home{% endblock %}
 {% block head %}{% endblock %}
-{% block heading %}Recent Posts{% endblock %}
+{% block heading %}Sherwyn's Information Security Blog{% endblock %}
 {% block content %}
+    <h3>Recent Posts</h3>
 {% include "post_selector.html" %}
 {# blog posts #}
 {{ populate_posts(posts) }}

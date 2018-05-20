@@ -4,3 +4,4 @@ __pycache__
 *.pyc
 setenv.sh
 blog_site*.sql
+server_ship.sh

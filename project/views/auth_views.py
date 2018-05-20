@@ -69,7 +69,7 @@ def register():
             if users_model.create_new_user(username, email, password):
                 flash("Thanks for signing up! Please check your email for a verification link.")
                 project.users.auth.send_email_verification(username)
-                sessions.login_user(username)
+                sessions.login_user(username, password)
                 return redirect(url_for("index"))
 
             else:

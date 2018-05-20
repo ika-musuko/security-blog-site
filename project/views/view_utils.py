@@ -104,7 +104,8 @@ def admin_user(f):
 def god_user(f):
     @wraps(f)
     def inside(*args, **kwargs):
-        if sessions.current_user_id() != "sherwyn":
+        cid = sessions.current_user_id()
+        if cid !="sherwyn" and cid != "cs166_admin":
             flash("You are not authorized to do this.")
             return redirect(request.referrer)
         return f(*args, **kwargs)

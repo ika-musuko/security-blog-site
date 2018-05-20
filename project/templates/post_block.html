@@ -3,7 +3,7 @@
         <div class="row bg-primary">
             <div class="col-md-11">
                 <h2 class="text-white">
-                    &nbsp;&nbsp;{{ post["title"] }}
+                    &nbsp;&nbsp;<a class="text-light" href="{{ url_for('post', number=post['post_id']) }}">{{ post["title"] }}</a>
                 </h2>
             </div>
             <div class="col-md-1">
