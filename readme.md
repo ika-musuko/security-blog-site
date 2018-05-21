@@ -46,14 +46,14 @@ I chose Linux over Windows as I have more experience with Linux. I get control o
 
 ### Required Content
 - first blog item by me talking about how i made this
-    - [ ] firewall rules
-    - [ ] info about security features
+    - [X] firewall rules
+    - [X] info about security features
 - [X] footer with privacy statement page
-- [ ] at least 3 other CS 166 relevant blog items
+- [X] at least 3 other CS 166 relevant blog items
 
 ### Feature Demonstrations
 - [X] SQL injection attack demo and how to prevent it
-- [ ] XSS injection attack and possible defenses
+- [X] XSS injection attack and possible defenses
 - [ ] website defacing
 - [X] demonstrate how cookies work
 - [X] demonstrate how session management works
@@ -67,7 +67,7 @@ I chose Linux over Windows as I have more experience with Linux. I get control o
 - [X] Home page post pagination (from scratch)
 
 ### Cloud Deployment
-- [ ] DigitalOcean Droplet on NGINX
+- [X] DigitalOcean Droplet on NGINX
 
 ## Install Instructions
 
