@@ -18,6 +18,7 @@
     {% endif %}
 {% endif %}
  <h2 class="top30">{{ username }}'s posts</h2>
+    <h6>Total posts: {{ total_posts }}</h6>
 {{ populate_posts(posts) }}
     {# {% include "post_selector.html" %}
 {({ populate_posts(posts) }} } #}

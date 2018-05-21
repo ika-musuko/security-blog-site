@@ -5,3 +5,4 @@ __pycache__
 setenv.sh
 blog_site*.sql
 server_ship.sh
+*conflicted copy*

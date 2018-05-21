@@ -1,4 +1,5 @@
 from project import models, POSTS_PER_PAGE
+from project.models import FETCHALL
 import datetime
 
 def query_posts(start, end, user_id: int=None):
@@ -10,6 +11,12 @@ def query_posts(start, end, user_id: int=None):
         values = [end, start]
     print(prepared_statement, values)
     return models.get_sql(prepared_statement, values=values, amount=start-end)
+
+def get_user_posts(user_id: int):
+    prepared_statement = "SELECT post_id, title, date_created, preview, user_id FROM posts WHERE user_id=%s ORDER BY date_created ASC;"
+    values = [user_id]
+    return models.get_sql(prepared_statement, values=values, amount=FETCHALL)
+
 
 def get_post(post_id: int):
     prepared_statement="SELECT post_id, title, date_created, post_content, user_id FROM posts WHERE post_id = %s;"

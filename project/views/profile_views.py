@@ -30,7 +30,8 @@ def profile(username: str, page: int=1):
     user = users_model.get_user(username)
     # if the user exists, show their profile
     if user:
-        user_posts, total_posts = paginate_posts(page, username)
+        user_posts = posts_model.get_user_posts(username)
+        total_posts = len(user_posts)
         return render_template("profile.html", username=username, user=user, posts=user_posts, total_posts=total_posts, page=page)
     flash("User %s does not exist." % username)
     return redirect(url_for("index"))
