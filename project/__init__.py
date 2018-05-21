@@ -1,4 +1,3 @@
-from project import jinja_globals
 from flask import Flask
 from flask_recaptcha import ReCaptcha
 import pymysql
@@ -30,8 +29,6 @@ app.config.update({
 recaptcha = ReCaptcha()
 recaptcha.init_app(app)
 
-
-# global jinja functions
-app.jinja_env.globals.update(**jinja_globals.JINJA_GLOBALS)
-
 from project.views import auth_views, post_views, error_views, demo_views, profile_views, view_utils
+
+

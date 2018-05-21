@@ -16,7 +16,7 @@
                 {#<li class="page-item">
                 <a class="page-link" href="{{ url_for(active_page, page=page-1) }}">Previous</a>
             </li>#}
-                {% for p in range(total_posts//POSTS_PER_PAGE + 1) %}
+                {% for p in range(total_posts//POSTS_PER_PAGE) %}
                 <li class="page-item">
                     <a class="page-link {% if p+1==page %}active-selection{% endif %}" href="{{ url_for(active_page, page=p+1, **values) }}">{{ p+1 }}</a>
                 </li>

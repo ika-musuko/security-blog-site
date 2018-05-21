@@ -1,13 +1,14 @@
-from project import models
+from project import models, POSTS_PER_PAGE
 import datetime
 
 def query_posts(start, end, user_id: int=None):
     if user_id:
-        prepared_statement="SELECT post_id, title, date_created, preview, user_id FROM posts WHERE post_id < %s AND user_id = %s ORDER BY date_created ASC;"
-        values = [start, user_id]
+        prepared_statement="SELECT post_id, title, date_created, preview, user_id FROM posts WHERE user_id = %s ORDER BY date_created ASC;"
+        values = [user_id]
     else:
-        prepared_statement="SELECT post_id, title, date_created, preview, user_id FROM posts WHERE post_id < %s ORDER BY date_created DESC;"
-        values = [start]
+        prepared_statement="SELECT post_id, title, date_created, preview, user_id FROM posts ORDER BY date_created DESC LIMIT %s, %s;"
+        values = [end, start]
+    print(prepared_statement, values)
     return models.get_sql(prepared_statement, values=values, amount=start-end)
 
 def get_post(post_id: int):
@@ -29,8 +30,8 @@ def add_post(user_id: str, title: str, content: str):
     })
 
 def edit_post(post_id: int, title: str, content: str):
-    prepared_statement = "UPDATE posts SET title = %s, post_content = %s WHERE post_id = %s;"
-    values = [title, content, post_id]
+    prepared_statement = "UPDATE posts SET title = %s, post_content = %s, preview = %s WHERE post_id = %s;"
+    values = [title, content, content[:100], post_id]
     models.set_sql(prepared_statement, values)
 
 def delete_post(post_id: int):

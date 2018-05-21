@@ -39,22 +39,22 @@ I chose Linux over Windows as I have more experience with Linux. I get control o
 - [X] **session management**: use sessions to correctly remember the user
 - [X] injection attack prevention (except for attack demo)
 - [X] forms use POST method
-- [ ] forms have CSRF prevention (except for attack demo)
+- [X] forms have CSRF prevention (except for attack demo)
 
 
 ### Required Content
 - first blog item by me talking about how i made this
     - [ ] firewall rules
     - [ ] info about security features
-- [ ] footer with privacy statement page
+- [X] footer with privacy statement page
 - [ ] at least 3 other CS 166 relevant blog items
 
 ### Feature Demonstrations
 - [ ] SQL injection attack demo and how to prevent it
 - [ ] XSS injection attack and possible defenses
 - [ ] website defacing
-- [ ] demonstrate how cookies work
-- [ ] demonstrate how session management works
+- [X] demonstrate how cookies work
+- [X] demonstrate how session management works
  
 ### Bonus Features
 - [X] Bootstrap styling
@@ -62,6 +62,7 @@ I chose Linux over Windows as I have more experience with Linux. I get control o
 - [X] Two-step e-mail verification for new users
 - [X] Markdown styling for blog posts
 - [X] View all users
+- [X] Home page post pagination (from scratch)
 
 ### Cloud Deployment
 - [ ] DigitalOcean Droplet on NGINX

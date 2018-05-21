@@ -9,7 +9,7 @@ import markdown
 
 from project.models import posts_model
 from project import app
-from project.views.view_utils import GETPOST, login_required, email_verified, postmaker, paginate_posts
+from project.views.view_utils import GETPOST, login_required, email_verified, postmaker, paginate_posts, csrf_protect
 from project.users import sessions
 
 
@@ -21,6 +21,7 @@ def index(page: int=1):
     #total_posts = 41
     #posts = postmaker(total_posts, page)
     posts, total_posts = paginate_posts(page)
+    print(posts)
     return render_template("index.html", total_posts=total_posts, posts=posts, page=page)
 
 
@@ -37,6 +38,7 @@ def post(number: int):
 
 @app.route("/new_post", methods=GETPOST)
 @login_required
+@csrf_protect
 @email_verified
 def new_post():
     title = ''
@@ -68,6 +70,7 @@ def check_own_post(post_id: int) -> bool:
 
 @app.route("/edit_post/<int:number>", methods=GETPOST)
 @login_required
+@csrf_protect
 @email_verified
 def edit_post(number: int):
     if not check_own_post:

@@ -1,7 +1,7 @@
 import random
 from functools import wraps
 
-from flask import request, url_for, flash, session
+from flask import request, url_for, flash, session, abort
 from werkzeug.utils import redirect
 
 import datetime
@@ -28,6 +28,10 @@ def inject_login_session():
 def inject_current_user():
     return dict(current_user=sessions.current_user())
 
+@app.context_processor
+def inject_csrf_token():
+    return dict(csrf_token=csrf_token)
+
 # set cookies on every request
 @app.after_request
 def set_cookie(resp):
@@ -37,7 +41,23 @@ def set_cookie(resp):
     print(session)
     return resp
 
+# check csrf token
+def csrf_protect(f):
+    @wraps(f)
+    def inside(*args, **kwargs):
+        if request.method == "POST":
+            token = session.pop("_csrf_token", None)
+            if not token or token != request.form.get("csrf_token"):
+                abort(403)
+        return f(*args, **kwargs)
+    return inside
+
 # decorators
+def csrf_token():
+    token = random_string(length=64)
+    session['_csrf_token'] = token
+    return token
+
 def post_searcher(f):
     '''
     use this decorator for any page that utilizes the search bar
@@ -135,3 +155,5 @@ def paginate_posts(page: int=1, user_id: int=None):
     posts = posts_model.query_posts(start=page * POSTS_PER_PAGE, end=(page - 1) * POSTS_PER_PAGE, user_id=user_id)
     total_posts = posts_model.get_total_posts()
     return posts, total_posts
+
+

@@ -6,7 +6,7 @@ import project.exceptions.user_exceptions
 import project.users.auth
 from project import app, recaptcha
 from project.users import sessions
-from project.views.view_utils import GETPOST, login_required, logout_required, email_unverified
+from project.views.view_utils import GETPOST, login_required, logout_required, email_unverified, csrf_protect
 from project.utils import check_valid_password
 from project.models import users_model
 
@@ -14,6 +14,7 @@ from time import sleep
 
 
 @app.route("/login", methods=GETPOST)
+@csrf_protect
 @logout_required
 def login():
 
@@ -36,6 +37,7 @@ def login():
 
 
 @app.route("/register", methods=GETPOST)
+@csrf_protect
 @logout_required
 def register():
 
@@ -82,6 +84,7 @@ def register():
     return render_template("register.html")
 
 @app.route("/resend_verification", methods=GETPOST)
+@csrf_protect
 @login_required
 @email_unverified
 def resend_verification():
