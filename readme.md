@@ -1,5 +1,7 @@
 # CS 166 Security Blog Web Application
 
+website: http://security-blog.sherwyns.life/
+
 This is a blog website made in Flask for CS 166 discussing and demonstrating various topics in Information Security  
 I avoided using any SQL ORMs, rolled out my own form verification, and handled sessions myself (as opposed to using a third-party session management library such as Flask-Login) as specified so I didn't have any unfair advantages against those using JSP and Apache.  
 
