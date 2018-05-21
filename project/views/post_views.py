@@ -23,23 +23,13 @@ def index(page: int=1):
     posts, total_posts = paginate_posts(page)
     return render_template("index.html", total_posts=total_posts, posts=posts, page=page)
 
-# @app.route('/search/<keyword>', methods=GETPOST)
-# @app.route('/search/<keyword>/<int:page>', methods=GETPOST)
-# def search(keyword: str, page: int=1):
-#     # query the database for page*POSTS_PER_PAGE ~ (page+1)*POSTS_PER_PAGE
-#     #todo
-#     total_posts = 21
-#     posts = postmaker(total_posts, page)
-#
-#    return render_template("search.html", keyword=keyword, total_posts=total_posts, posts=posts, page=page)
-
 
 @app.route("/post/<int:number>")
 def post(number: int):
     post = posts_model.get_post(post_id=number)
     # the post does exist
     if post:
-        marked_content = Markup(markdown.markdown(post["post_content"]))
+        marked_content = Markup(markdown.markdown(post["post_content"], safe_mode='escape'))
         return render_template("post.html", number=number, post=post, content=marked_content)
     # the post does not exist
     flash("Post %s does not exist" % number)
@@ -76,7 +66,7 @@ def check_own_post(post_id: int) -> bool:
     return cu['user_id'] == post['user_id']
 
 
-@app.route("/edit_post/<int:number>")
+@app.route("/edit_post/<int:number>", methods=GETPOST)
 @login_required
 @email_verified
 def edit_post(number: int):
@@ -99,11 +89,14 @@ def edit_post(number: int):
             flash("Please write some content.")
             return redirect(url_for("edit_post", number=number, title=title, content=content))
 
+        posts_model.edit_post(post_id=number, title=title, content=content)
+        flash("Your post has been edited.")
+        return redirect(url_for("post", number=number))
 
     return render_template("edit_post.html", number=number, title=title, content=content)
 
 
-@app.route("/delete_post/<int:number>")
+@app.route("/delete_post/<int:number>", methods=GETPOST)
 @login_required
 @email_verified
 def delete_post(number: int):
@@ -113,6 +106,7 @@ def delete_post(number: int):
 
     else:
         posts_model.delete_post(number)
+        flash("This post has been deleted.")
 
     return redirect(url_for("index"))
 

@@ -28,6 +28,11 @@ def add_post(user_id: str, title: str, content: str):
 
     })
 
+def edit_post(post_id: int, title: str, content: str):
+    prepared_statement = "UPDATE posts SET title = %s, post_content = %s WHERE post_id = %s;"
+    values = [title, content, post_id]
+    models.set_sql(prepared_statement, values)
+
 def delete_post(post_id: int):
     prepared_statement = "DELETE FROM posts WHERE post_id = %s;"
     models.set_sql(prepared_statement, [post_id])

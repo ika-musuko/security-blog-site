@@ -8,8 +8,8 @@
 {% block content %}
     <div class="post-header text-muted container rounded border-left border-success">
     <i>
-        <p><strong>Posted on: </strong>{{ post['date_created'] }}</p>
-        <p><strong>Author: </strong>{{ post['user_id'] }}</p>
+        <h6><strong>Posted on: </strong>{{ post['date_created'] }}</h6>
+        <h6><strong>Author: </strong>{{ post['user_id'] }}</h6>
         {% include "post_manager.html" %}
     </i>
     </div>

@@ -39,7 +39,7 @@ I chose Linux over Windows as I have more experience with Linux. I get control o
 - [X] **session management**: use sessions to correctly remember the user
 - [X] injection attack prevention (except for attack demo)
 - [X] forms use POST method
-- [X] forms have CSRF prevention (except for attack demo)
+- [ ] forms have CSRF prevention (except for attack demo)
 
 
 ### Required Content
@@ -58,7 +58,7 @@ I chose Linux over Windows as I have more experience with Linux. I get control o
  
 ### Bonus Features
 - [X] Bootstrap styling
-- [ ] Edit own post
+- [X] Edit own post
 - [X] Two-step e-mail verification for new users
 - [X] Markdown styling for blog posts
 - [X] View all users
