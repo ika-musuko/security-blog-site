@@ -6,17 +6,21 @@
 {% block head %}{% endblock %}
 {% block heading %}{{ post['title'] }}{% endblock %}
 {% block content %}
-    <div class="post-header text-muted container rounded border-left border-success">
-    <i>
-        <h6><strong>Posted on: </strong>{{ post['date_created'] }}</h6>
-        <h6><strong>Author: </strong>{{ post['user_id'] }}</h6>
-        {% include "post_manager.html" %}
-    </i>
+    <div class="row">
+        <div class="col post-header text-muted container rounded border-left border-success">
+        <i>
+            <h6><strong>Posted on: </strong>{{ post['date_created'] }}</h6>
+            <h6><strong>Author: </strong>{{ post['user_id'] }}</h6>
+            {% include "post_manager.html" %}
+        </i>
+        </div>
     </div>
-    &nbsp;
-    <div class="post-content">
-        {# <pre class='post-body'>{{ post['post_content'] }}</pre> #}
-        {{ content }}
-    </div>
+    &nbsp;<div class="row">
+        <div class="post-content col">
+            {# <pre class='post-body'>{{ post['post_content'] }}</pre> #}
+            {{ content }}
+        </div>
+     </div>
+
 {% endblock %}
 

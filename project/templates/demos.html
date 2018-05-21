@@ -14,27 +14,33 @@
         SQL Injection involves writing SQL queries in "unsanitized" input areas in an application. In an SQL-based architecture, form input is sent to the application which generates an appropriate SQL query to fetch or set the desired data. If an attacker finds an insecure endpoint, they can try to write queries or parts of queries to try to gain unauthorized access to protected data or authenticate themselves.
     </p>
     <p>
-        Suppose we have this table:<br/>
+        Suppose we have this table:
+    </p>
         <img src="https://i.imgur.com/VHLdqV7.png" alt="insecure-users"><br/><br/>
-
-        Let's create some users...<br/>
+    <p>
+        Let's create some users...
+    </p>
         <img src="https://i.imgur.com/8SlPJhj.png" alt="insecure-add"><br/><br/>
-
+    <p>
         Now let's write some code to take form data and verify their credentials.
+    </p>
         <img src="https://i.imgur.com/ibRLixS.png" alt="insecure-sql"><br/>
-
+    <p>
         Basically, we're checking if there's any user which matches the parameter and if the supplied password is associated with them. If there is such a user, we return a key-value pair of the user_id. Otherwise, we return nothing.
     </p>
     <p>
 
         It does work...<br/>
+    </p>
         <img src="https://i.imgur.com/5axEAGT.png" alt="works-but"><br/>
-
+    <p>
         ...however it is quite obviously insecure. Can you spot the problem?
     </p>
     <p>
         Besides the fact that the passwords are not salted and hashed (they are on the actual website, read the <a href="{{ url_for("profile", username="behind_the_scenes") }}">Behind the Scenes</a> blog), this method of querying the database is fundamentally insecure, regardless of if the passwords were hashed or not.  You could carefully write a partial SQL query inside of the password field and successfully verify the user without actually knowing what their credentials were.
+    </p>
         <img src="https://i.imgur.com/tjZGDNB.png" alt="sql-injection"><br/>
+    <p>
         This hack relies on the fact that "1" is equal to "1" and therefore will always return TRUE. If we attach an OR to it, we have ourselves a TRUE boolean statement and therefore, we will get back the user_id.
     </p>
 
@@ -58,6 +64,8 @@
 
     <p>
         You can see that it works here: <br/>
+    </p>
+    <p>
         <img src="https://i.imgur.com/ic9JYaT.png" alt="prepared-exec"><br/>
     </p>
     &nbsp;
@@ -81,17 +89,22 @@
 
     <p>
         My website prevents XSS attacks by using the POST method in forms and inserting a CSRF token in all of them and adding the CSRF token to the session. Upon a form submission, I check if the CSRF token matches the session's CSRF token to ensure that no XSS attacks are happening.<br/>
+    </p>
 
         <img src="https://i.imgur.com/00OQrrY.png" alt="csrf-token-gen"><br/>
+    <p>
         Generating a token and storing it to the session.<br/>
+    </p>
         <img src="https://i.imgur.com/Y72NoIE.png" alt="csrf-form"><br/>
+    <p>
         <i>Inserting the CSRF token into the form</i>
     </p>
 
     <p>
         Additionally, since I decided to support Markdown in my blog post forms, I disable support for HTML tags so that there is no chance for arbitrary code execution from a blog post. HTML just shows up as plaintext.
+    </p>
         <img src="https://i.imgur.com/TOzXGVk.png" alt="markdown-flush"><br/>
-        <i>Using the "safe_mode" argument inside the markdown converter. This escapes any HTML (as a drawback, you cannot resize any images).</i>
+     <p>   <i>Using the "safe_mode" argument inside the markdown converter. This escapes any HTML (as a drawback, you cannot resize any images).</i>
     </p>
 
     <h2>Website Defacing</h2>
