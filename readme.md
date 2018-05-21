@@ -50,7 +50,7 @@ I chose Linux over Windows as I have more experience with Linux. I get control o
 - [ ] at least 3 other CS 166 relevant blog items
 
 ### Feature Demonstrations
-- [ ] SQL injection attack demo and how to prevent it
+- [X] SQL injection attack demo and how to prevent it
 - [ ] XSS injection attack and possible defenses
 - [ ] website defacing
 - [X] demonstrate how cookies work
