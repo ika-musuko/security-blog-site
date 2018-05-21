@@ -1,5 +1,5 @@
 
-#CREATE database  blog_site;
+CREATE database  blog_site;
 USE blog_site;
 SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS posts;

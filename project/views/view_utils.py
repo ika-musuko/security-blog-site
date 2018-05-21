@@ -37,8 +37,6 @@ def inject_csrf_token():
 def set_cookie(resp):
     resp.set_cookie(key="last_here", value=str(datetime.datetime.now()))
     resp.set_cookie(key="last_page", value=request.base_url)
-
-    print(session)
     return resp
 
 # check csrf token

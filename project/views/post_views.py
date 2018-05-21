@@ -73,7 +73,7 @@ def check_own_post(post_id: int) -> bool:
 @csrf_protect
 @email_verified
 def edit_post(number: int):
-    if not check_own_post:
+    if not check_own_post(number):
         flash("You may not edit this post.")
         return redirect(url_for("index"))
 
