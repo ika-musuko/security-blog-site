@@ -7,7 +7,64 @@
 {% block head %}{% endblock %}
 {% block heading %}Security Demos{% endblock %}
 {% block content %}
-SECURITY DEMOS
-SECURITY DEMOS
-SECURITY DEMOS
+    <p>On this page, various security features of the site are demonstrated. I show sandboxed attackable endpoints on this page and discuss how the actual site prevents these attacks.</p>
+    <h2>SQL Injection</h2>
+    <hr/>
+    <p>
+        SQL Injection involves writing SQL queries in "unsanitized" input areas in an application. In an SQL-based architecture, form input is sent to the application which generates an appropriate SQL query to fetch or set the desired data. If an attacker finds an insecure endpoint, they can try to write queries or parts of queries to try to gain unauthorized access to protected data or authenticate themselves.
+    </p>
+    <p>
+        Suppose we have this table:<br/>
+        <img src="https://i.imgur.com/VHLdqV7.png" alt="insecure-users"><br/><br/>
+
+        Let's create some users...<br/>
+        <img src="https://i.imgur.com/8SlPJhj.png" alt="insecure-add"><br/><br/>
+
+        Now let's write some code to take form data and verify their credentials.
+        <img src="https://i.imgur.com/ibRLixS.png" alt="insecure-sql"><br/>
+
+        Basically, we're checking if there's any user which matches the parameter and if the supplied password is associated with them. If there is such a user, we return a key-value pair of the user_id. Otherwise, we return nothing.
+    </p>
+    <p>
+
+        It does work...<br/>
+        <img src="https://i.imgur.com/5axEAGT.png" alt="works-but"><br/>
+
+        ...however it is quite obviously insecure. Can you spot the problem?
+    </p>
+    <p>
+        Besides the fact that the passwords are not salted and hashed (they are on the actual website, read the <a href="{{ url_for("profile", username="behind_the_scenes") }}">Behind the Scenes</a> blog), this method of querying the database is fundamentally insecure, regardless of if the passwords were hashed or not.  You could carefully write a partial SQL query inside of the password field and successfully verify the user without actually knowing what their credentials were.
+        <img src="https://i.imgur.com/tjZGDNB.png" alt="sql-injection"><br/>
+    </p>
+
+    <p>
+        The below form is an endpoint into this insecure database. Try it yourself! (The password field is not hidden for convenience). Can you find other ways to validate a user without knowing their password?<br/>
+        <form method="POST">
+            <label for="user_id">User ID</label>
+            <input class="form-control" name="user_id" type="text">
+            <label for="password">Password</label>
+            <input class="form-control" name="password" type="text">
+            <input id="csrf_token" name="csrf_token" type="hidden" value="{{ csrf_token() }}">
+            <input type="submit" class="btn btn-primary top10" value="login →">
+        </form>
+    </p>
+
+    <h2>XSS Injection</h2>
+    <hr/>
+    <p>
+
+    </p>
+    <h2>Website Defacing</h2>
+    <hr/>
+    <p>
+
+    </p>
+
+    <h2>Sessions and Cookies</h2>
+    <hr/>
+    <p>Read the following articles to see how sessions and cookies are implemented</p>
+    <ul>
+        <li><a href="">Sessions</a></li>
+        <li><a href="">Cookies</a></li>
+    </ul>
 {% endblock %}

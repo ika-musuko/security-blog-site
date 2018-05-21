@@ -3,7 +3,6 @@ from project.exceptions.user_exceptions import UserExistsException
 from project.utils import random_string, hash_password, comma_join
 import datetime
 
-
 def get_user(username: str, columns: list=None):
     columns_formatted = comma_join(columns) if columns else '*'
     return models.get_sql(statement="SELECT {} FROM users WHERE user_id=%s;".format(columns_formatted), values=[username], amount=1)

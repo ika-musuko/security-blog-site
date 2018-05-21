@@ -4,6 +4,7 @@ USE blog_site;
 SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS posts;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS insecure_users;
 SET FOREIGN_KEY_CHECKS=1;
 -- ************************************** users
 
@@ -19,6 +20,7 @@ CREATE TABLE IF NOT EXISTS users
 
 PRIMARY KEY (user_id)
 ) ENGINE = InnoDB;
+
 -- ************************************** posts
 
 CREATE TABLE IF NOT EXISTS posts
@@ -36,5 +38,13 @@ REFERENCES users(user_id)
  ON DELETE CASCADE
  ON UPDATE RESTRICT
 ) ENGINE = InnoDB;
--- ************************************** post_content
+
+-- ************************************** insecure_users
+CREATE TABLE IF NOT EXISTS insecure_users
+(
+ user_id VARCHAR(32) NOT NULL UNIQUE,
+ password VARBINARY(255) NOT NULL,
+
+PRIMARY KEY(user_id)
+) ENGINE = InnoDB;
 

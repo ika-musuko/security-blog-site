@@ -7,7 +7,7 @@ def sql_placeholder_gen(things: list):
     return ', '.join("%s" for _ in things)
 
 def comma_join(things: list):
-    return ', '.join(things)
+    return ', '.join(("`%s`" % t).replace('"', '"\\"') for t in things)
 
 def random_string(length: int) -> str:
     return ''.join((random.choice(string.ascii_letters+string.digits)) for _ in range(length))

@@ -42,6 +42,13 @@
                             <li class="nav-item">
                                 <a class="nav-link text-light {% if active_page == 'all_users' %} active {% endif %}" href="{{ url_for('all_users') }}">All Users</a>
                             </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="{{ url_for('profile', username="infosec_articles") }}">Infosec Articles</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="{{ url_for('profile', username="behind_the_scenes") }}">Behind the Scenes</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link text-light {% if active_page == 'demos' %} active {% endif %}" href="{{ url_for('demos') }}">Security Demos</a>
                             </li>
